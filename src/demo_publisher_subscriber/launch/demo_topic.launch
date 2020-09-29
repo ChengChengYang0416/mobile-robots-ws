@@ -1,0 +1,6 @@
+<launch>
+
+	<node name="demo_topic_publisher" pkg="demo_publisher_subscriber" type="demo_topic_publisher" output="screen"/>
+	<node name="demo_topic_subscriber" pkg="demo_publisher_subscriber" type="demo_topic_subscriber" output="screen"/>
+
+</launch>
