@@ -1,0 +1,6 @@
+<launch>
+
+	<node name="cp_1_publisher" pkg="checkpoint_1" type="cp_1_publisher" output="screen"/>
+	<node name="cp_1_subscriber" pkg="checkpoint_1" type="cp_1_subscriber" output="screen"/>
+
+</launch>

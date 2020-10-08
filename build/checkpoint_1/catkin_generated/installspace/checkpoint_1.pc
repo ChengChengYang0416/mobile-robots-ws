@@ -1,0 +1,8 @@
+prefix=/home/ncrl/mobile_robots_ws/install
+
+Name: checkpoint_1
+Description: Description of checkpoint_1
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 
