@@ -2,44 +2,40 @@
 #include <std_msgs/String.h>
 #include <std_msgs/Int32.h>
 
-ros::NodeHandle  nh;
-int k;
-int n;
+/* variables used for data processing */
+int output_data;
+int received_data;
 int check = 0;
 
-void messageCB(const std_msgs::Int32& toggle_msg){
-  n = toggle_msg.data;
-  k = n*2;
+/* subscriber call back function */
+void messageCB(const std_msgs::Int32& _msg){
+  received_data = _msg.data;
+  output_data = received_data*2;
   check = 1;
 }
 
+/* publisher and subscriber */
+ros::NodeHandle  nh;
 std_msgs::Int32 str_msg;
-std_msgs::Int32 str_msg2;
 ros::Subscriber<std_msgs::Int32> sub("/numbers", &messageCB);
 ros::Publisher chatter("chatter", &str_msg);
-ros::Publisher get_number("get_number", &str_msg2);
-
-
-char hello[13] = "hello world!";
 
 void setup()
 {
   nh.initNode();
   nh.subscribe(sub);
   nh.advertise(chatter);
-  nh.advertise(get_number);
 }
 
 void loop()
 {
-  str_msg2.data = n;
-  str_msg.data = k;
-  get_number.publish(&str_msg2);
+
+  str_msg.data = output_data;
   if (check == 1){
     chatter.publish( &str_msg );
     check = 0;
   }
   
   nh.spinOnce();
-  delay(1000);
+  delay(100);
 }
