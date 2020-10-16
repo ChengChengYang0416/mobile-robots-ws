@@ -1,2 +1,2 @@
 checkpoint_1:demo_publisher_subscriber
--G CodeBlocks - Unix Makefiles -DCMAKE_BUILD_TYPE=Debug -DCATKIN_DEVEL_PREFIX=/home/ncrl/mobile_robots_ws/devel -DCMAKE_INSTALL_PREFIX=/home/ncrl/mobile_robots_ws/install
+-DCATKIN_DEVEL_PREFIX=/home/ncrl/mobile_robots_ws/devel -DCMAKE_INSTALL_PREFIX=/home/ncrl/mobile_robots_ws/install -G Unix Makefiles
