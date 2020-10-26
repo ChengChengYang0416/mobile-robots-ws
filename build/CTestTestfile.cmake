@@ -6,4 +6,5 @@
 # testing this directory and lists subdirectories to be tested as well.
 subdirs("gtest")
 subdirs("checkpoint_1")
+subdirs("ckeckpoint_2")
 subdirs("demo_publisher_subscriber")

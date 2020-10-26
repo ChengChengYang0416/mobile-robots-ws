@@ -306,6 +306,12 @@ checkpoint_1_BINARY_DIR:STATIC=/home/ncrl/mobile_robots_ws/build/checkpoint_1
 //Value Computed by CMake
 checkpoint_1_SOURCE_DIR:STATIC=/home/ncrl/mobile_robots_ws/src/checkpoint_1
 
+//Value Computed by CMake
+ckeckpoint_2_BINARY_DIR:STATIC=/home/ncrl/mobile_robots_ws/build/ckeckpoint_2
+
+//Value Computed by CMake
+ckeckpoint_2_SOURCE_DIR:STATIC=/home/ncrl/mobile_robots_ws/src/ckeckpoint_2
+
 //The directory containing a CMake configuration file for cpp_common.
 cpp_common_DIR:PATH=/opt/ros/melodic/share/cpp_common/cmake
 
@@ -515,7 +521,7 @@ CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_NM
 CMAKE_NM-ADVANCED:INTERNAL=1
 //number of local generators
-CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=6
+CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=7
 //ADVANCED property for variable: CMAKE_OBJCOPY
 CMAKE_OBJCOPY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_OBJDUMP
