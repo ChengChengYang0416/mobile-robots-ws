@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <package format="2">
-  <name>ckeckpoint_2</name>
+  <name>checkpoint_2</name>
   <version>0.0.0</version>
-  <description>The ckeckpoint_2 package</description>
+  <description>The checkpoint_2 package</description>
 
   <!-- One maintainer tag required, multiple allowed, one person per tag -->
   <!-- Example:  -->

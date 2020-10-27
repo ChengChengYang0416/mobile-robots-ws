@@ -7,5 +7,4 @@
 # new environment variables
 
 # modified environment variables
-export LD_LIBRARY_PATH="/home/ncrl/mobile_robots_ws/devel/lib:/home/ncrl/catkin_ws/devel/lib:/opt/ros/melodic/lib:$LD_LIBRARY_PATH"
 export PWD='/home/ncrl/mobile_robots_ws/build'

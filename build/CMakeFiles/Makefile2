@@ -994,22 +994,22 @@ clean: checkpoint_1/CMakeFiles/std_msgs_generate_messages_py.dir/clean
 .PHONY : clean
 
 #=============================================================================
-# Directory level rules for directory ckeckpoint_2
+# Directory level rules for directory checkpoint_2
 
 # Convenience name for "all" pass in the directory.
-ckeckpoint_2/all:
+checkpoint_2/all:
 
-.PHONY : ckeckpoint_2/all
+.PHONY : checkpoint_2/all
 
 # Convenience name for "clean" pass in the directory.
-ckeckpoint_2/clean:
+checkpoint_2/clean:
 
-.PHONY : ckeckpoint_2/clean
+.PHONY : checkpoint_2/clean
 
 # Convenience name for "preinstall" pass in the directory.
-ckeckpoint_2/preinstall:
+checkpoint_2/preinstall:
 
-.PHONY : ckeckpoint_2/preinstall
+.PHONY : checkpoint_2/preinstall
 
 #=============================================================================
 # Directory level rules for directory demo_publisher_subscriber

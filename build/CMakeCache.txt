@@ -307,6 +307,12 @@ checkpoint_1_BINARY_DIR:STATIC=/home/ncrl/mobile_robots_ws/build/checkpoint_1
 checkpoint_1_SOURCE_DIR:STATIC=/home/ncrl/mobile_robots_ws/src/checkpoint_1
 
 //Value Computed by CMake
+checkpoint_2_BINARY_DIR:STATIC=/home/ncrl/mobile_robots_ws/build/checkpoint_2
+
+//Value Computed by CMake
+checkpoint_2_SOURCE_DIR:STATIC=/home/ncrl/mobile_robots_ws/src/checkpoint_2
+
+//Value Computed by CMake
 ckeckpoint_2_BINARY_DIR:STATIC=/home/ncrl/mobile_robots_ws/build/ckeckpoint_2
 
 //Value Computed by CMake

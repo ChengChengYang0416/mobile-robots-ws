@@ -68,17 +68,26 @@ install/strip/fast: preinstall/fast
 	/usr/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
 .PHONY : install/strip/fast
 
-# Special rule for the target install/local
-install/local: preinstall
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
-	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
-.PHONY : install/local
+# Special rule for the target edit_cache
+edit_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
+	/usr/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+.PHONY : edit_cache
 
-# Special rule for the target install/local
-install/local/fast: preinstall/fast
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
-	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
-.PHONY : install/local/fast
+# Special rule for the target edit_cache
+edit_cache/fast: edit_cache
+
+.PHONY : edit_cache/fast
+
+# Special rule for the target list_install_components
+list_install_components:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Available install components are: \"Unspecified\""
+.PHONY : list_install_components
+
+# Special rule for the target list_install_components
+list_install_components/fast: list_install_components
+
+.PHONY : list_install_components/fast
 
 # Special rule for the target test
 test:
@@ -91,15 +100,28 @@ test/fast: test
 
 .PHONY : test/fast
 
-# Special rule for the target list_install_components
-list_install_components:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Available install components are: \"Unspecified\""
-.PHONY : list_install_components
+# Special rule for the target install/local
+install/local: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
+	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+.PHONY : install/local
 
-# Special rule for the target list_install_components
-list_install_components/fast: list_install_components
+# Special rule for the target install/local
+install/local/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
+	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+.PHONY : install/local/fast
 
-.PHONY : list_install_components/fast
+# Special rule for the target rebuild_cache
+rebuild_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
+	/usr/bin/cmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+.PHONY : rebuild_cache
+
+# Special rule for the target rebuild_cache
+rebuild_cache/fast: rebuild_cache
+
+.PHONY : rebuild_cache/fast
 
 # Special rule for the target install
 install: preinstall
@@ -113,38 +135,16 @@ install/fast: preinstall/fast
 	/usr/bin/cmake -P cmake_install.cmake
 .PHONY : install/fast
 
-# Special rule for the target edit_cache
-edit_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	/usr/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
-.PHONY : edit_cache
-
-# Special rule for the target edit_cache
-edit_cache/fast: edit_cache
-
-.PHONY : edit_cache/fast
-
-# Special rule for the target rebuild_cache
-rebuild_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/usr/bin/cmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
-.PHONY : rebuild_cache
-
-# Special rule for the target rebuild_cache
-rebuild_cache/fast: rebuild_cache
-
-.PHONY : rebuild_cache/fast
-
 # The main all target
 all: cmake_check_build_system
-	cd /home/ncrl/mobile_robots_ws/build && $(CMAKE_COMMAND) -E cmake_progress_start /home/ncrl/mobile_robots_ws/build/CMakeFiles /home/ncrl/mobile_robots_ws/build/ckeckpoint_2/CMakeFiles/progress.marks
-	cd /home/ncrl/mobile_robots_ws/build && $(MAKE) -f CMakeFiles/Makefile2 ckeckpoint_2/all
+	cd /home/ncrl/mobile_robots_ws/build && $(CMAKE_COMMAND) -E cmake_progress_start /home/ncrl/mobile_robots_ws/build/CMakeFiles /home/ncrl/mobile_robots_ws/build/checkpoint_2/CMakeFiles/progress.marks
+	cd /home/ncrl/mobile_robots_ws/build && $(MAKE) -f CMakeFiles/Makefile2 checkpoint_2/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/ncrl/mobile_robots_ws/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /home/ncrl/mobile_robots_ws/build && $(MAKE) -f CMakeFiles/Makefile2 ckeckpoint_2/clean
+	cd /home/ncrl/mobile_robots_ws/build && $(MAKE) -f CMakeFiles/Makefile2 checkpoint_2/clean
 .PHONY : clean
 
 # The main clean target
@@ -154,60 +154,18 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /home/ncrl/mobile_robots_ws/build && $(MAKE) -f CMakeFiles/Makefile2 ckeckpoint_2/preinstall
+	cd /home/ncrl/mobile_robots_ws/build && $(MAKE) -f CMakeFiles/Makefile2 checkpoint_2/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /home/ncrl/mobile_robots_ws/build && $(MAKE) -f CMakeFiles/Makefile2 ckeckpoint_2/preinstall
+	cd /home/ncrl/mobile_robots_ws/build && $(MAKE) -f CMakeFiles/Makefile2 checkpoint_2/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
 	cd /home/ncrl/mobile_robots_ws/build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
-
-# Convenience name for target.
-ckeckpoint_2/CMakeFiles/motors_cmd_pub.dir/rule:
-	cd /home/ncrl/mobile_robots_ws/build && $(MAKE) -f CMakeFiles/Makefile2 ckeckpoint_2/CMakeFiles/motors_cmd_pub.dir/rule
-.PHONY : ckeckpoint_2/CMakeFiles/motors_cmd_pub.dir/rule
-
-# Convenience name for target.
-motors_cmd_pub: ckeckpoint_2/CMakeFiles/motors_cmd_pub.dir/rule
-
-.PHONY : motors_cmd_pub
-
-# fast build rule for target.
-motors_cmd_pub/fast:
-	cd /home/ncrl/mobile_robots_ws/build && $(MAKE) -f ckeckpoint_2/CMakeFiles/motors_cmd_pub.dir/build.make ckeckpoint_2/CMakeFiles/motors_cmd_pub.dir/build
-.PHONY : motors_cmd_pub/fast
-
-src/motors_cmd_pub.o: src/motors_cmd_pub.cpp.o
-
-.PHONY : src/motors_cmd_pub.o
-
-# target to build an object file
-src/motors_cmd_pub.cpp.o:
-	cd /home/ncrl/mobile_robots_ws/build && $(MAKE) -f ckeckpoint_2/CMakeFiles/motors_cmd_pub.dir/build.make ckeckpoint_2/CMakeFiles/motors_cmd_pub.dir/src/motors_cmd_pub.cpp.o
-.PHONY : src/motors_cmd_pub.cpp.o
-
-src/motors_cmd_pub.i: src/motors_cmd_pub.cpp.i
-
-.PHONY : src/motors_cmd_pub.i
-
-# target to preprocess a source file
-src/motors_cmd_pub.cpp.i:
-	cd /home/ncrl/mobile_robots_ws/build && $(MAKE) -f ckeckpoint_2/CMakeFiles/motors_cmd_pub.dir/build.make ckeckpoint_2/CMakeFiles/motors_cmd_pub.dir/src/motors_cmd_pub.cpp.i
-.PHONY : src/motors_cmd_pub.cpp.i
-
-src/motors_cmd_pub.s: src/motors_cmd_pub.cpp.s
-
-.PHONY : src/motors_cmd_pub.s
-
-# target to generate assembly for a file
-src/motors_cmd_pub.cpp.s:
-	cd /home/ncrl/mobile_robots_ws/build && $(MAKE) -f ckeckpoint_2/CMakeFiles/motors_cmd_pub.dir/build.make ckeckpoint_2/CMakeFiles/motors_cmd_pub.dir/src/motors_cmd_pub.cpp.s
-.PHONY : src/motors_cmd_pub.cpp.s
 
 # Help Target
 help:
@@ -216,16 +174,12 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... install/strip"
-	@echo "... install/local"
-	@echo "... test"
-	@echo "... list_install_components"
-	@echo "... motors_cmd_pub"
-	@echo "... install"
 	@echo "... edit_cache"
+	@echo "... list_install_components"
+	@echo "... test"
+	@echo "... install/local"
 	@echo "... rebuild_cache"
-	@echo "... src/motors_cmd_pub.o"
-	@echo "... src/motors_cmd_pub.i"
-	@echo "... src/motors_cmd_pub.s"
+	@echo "... install"
 .PHONY : help
 
 
