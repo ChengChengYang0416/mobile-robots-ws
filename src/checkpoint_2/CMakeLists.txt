@@ -204,3 +204,6 @@ include_directories(
 
 ## Add folders to be run by python nosetests
 # catkin_add_nosetests(test)
+
+add_executable(motors_cmd_pub src/motors_cmd_pub.cpp)
+target_link_libraries(motors_cmd_pub ${catkin_LIBRARIES})

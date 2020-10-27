@@ -506,6 +506,19 @@ std_msgs_generate_messages_py/fast:
 .PHONY : std_msgs_generate_messages_py/fast
 
 #=============================================================================
+# Target rules for targets named motors_cmd_pub
+
+# Build rule for target.
+motors_cmd_pub: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 motors_cmd_pub
+.PHONY : motors_cmd_pub
+
+# fast build rule for target.
+motors_cmd_pub/fast:
+	$(MAKE) -f checkpoint_2/CMakeFiles/motors_cmd_pub.dir/build.make checkpoint_2/CMakeFiles/motors_cmd_pub.dir/build
+.PHONY : motors_cmd_pub/fast
+
+#=============================================================================
 # Target rules for targets named demo_topic_subscriber
 
 # Build rule for target.
@@ -570,6 +583,7 @@ help:
 	@echo "... std_msgs_generate_messages_nodejs"
 	@echo "... roscpp_generate_messages_nodejs"
 	@echo "... std_msgs_generate_messages_py"
+	@echo "... motors_cmd_pub"
 	@echo "... demo_topic_subscriber"
 	@echo "... demo_topic_publisher"
 .PHONY : help
