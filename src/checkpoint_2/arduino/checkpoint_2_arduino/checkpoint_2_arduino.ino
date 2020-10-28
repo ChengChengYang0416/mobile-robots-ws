@@ -131,6 +131,9 @@ void loop()
     Serial.println(encoder_right.duration);
     encoder_right.duration = 0;
   }
+
+  nh.spinOnce();
+  delay(10);
 }
 
 void EncoderInit()
