@@ -1,4 +1,7 @@
+#include <ros.h>
+#include <std_msgs/Int32.h>
 #include <PID_v1.h>
+
 #define IN1 8                 // control pin for left motor
 #define IN2 9                 // control pin for left motor
 #define IN3 10                // control pin for right motor
@@ -60,6 +63,21 @@ pid_two_wheel pid_right = {
 PID myPID_left(&(pid_left.abs_duration), &(pid_left.val_output), &(pid_left.setpoint), pid_left.Kp, pid_left.Ki, pid_left.Kd, DIRECT);
 PID myPID_right(&(pid_right.abs_duration), &(pid_right.val_output), &(pid_right.setpoint), pid_right.Kp, pid_right.Ki, pid_right.Kd, DIRECT);
 
+/* call back function for ros subscriber (command of left motor) */
+void motor_L_cb(const std_msgs::Int32& _msg){
+  pid_left.setpoint = (double)_msg.data;
+}
+
+/* call back function for ros subscriber (command of right motor) */
+void motor_R_cb(const std_msgs::Int32& _msg){
+  pid_right.setpoint = (double)_msg.data;
+}
+
+/* initialize node */
+ros::NodeHandle nh;
+ros::Subscriber<std_msgs::Int32> motor_L_cmd("/motor_L", &motor_L_cb);
+ros::Subscriber<std_msgs::Int32> motor_R_cmd("/motor_R", &motor_R_cb);
+
 void setup()
 {
   /* initialize the serial port and pin mode */
@@ -81,6 +99,11 @@ void setup()
   
   /* initialize encoder module */
   EncoderInit();
+
+  /* initilaize node */
+  nh.initNode();
+  nh.subscribe(motor_L_cmd);
+  nh.subscribe(motor_R_cmd);
 }
 
 void loop()
