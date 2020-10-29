@@ -44,8 +44,8 @@ typedef struct
 pid_two_wheel pid_left = {
   .val_output = 0.0,
   .setpoint = 0.0,
-  .Kp = 0.2,
-  .Ki = 1,
+  .Kp = 1.0,
+  .Ki = 5,
   .Kd = 0.0,
   .abs_duration = 0.0,
   .result = true,
@@ -55,13 +55,14 @@ pid_two_wheel pid_left = {
 pid_two_wheel pid_right = {
   .val_output = 0.0,
   .setpoint = 0.0,
-  .Kp = 0.2,
-  .Ki = 1,
+  .Kp = 1.0,
+  .Ki = 5,
   .Kd = 0.0,
   .abs_duration = 0.0,
   .result = true,
   .forward_backward = true
 };
+double motor_factor = 1.06;
 
 /* declare for PID control */
 PID myPID_left(&(pid_left.abs_duration), &(pid_left.val_output), &(pid_left.setpoint), pid_left.Kp, pid_left.Ki, pid_left.Kd, DIRECT);
@@ -75,6 +76,7 @@ void motor_L_cb(const std_msgs::Int32& _msg){
     pid_left.forward_backward = false;
   }
   pid_left.setpoint = fabs((double)_msg.data);
+  pid_left.setpoint = pid_left.setpoint*motor_factor;
 }
 
 /* call back function for ros subscriber (command of right motor) */
@@ -104,10 +106,10 @@ void setup()
   pinMode(ENB, OUTPUT);
 
   /* initialize PID configuration */
-  pid_left.setpoint = 120;
+  pid_left.setpoint = 0;
   myPID_left.SetMode(AUTOMATIC);
   myPID_left.SetSampleTime(100);
-  pid_right.setpoint = 120;
+  pid_right.setpoint = 0;
   myPID_right.SetMode(AUTOMATIC);
   myPID_right.SetSampleTime(100);
   
