@@ -1,6 +1,7 @@
 #include <ros.h>
 #include <std_msgs/Int32.h>
 #include <PID_v1.h>
+#include <math.h>
 
 #define IN1 8                 // control pin for left motor
 #define IN2 9                 // control pin for left motor
@@ -36,6 +37,7 @@ typedef struct
   double Kd;
   double abs_duration;
   boolean result;
+  boolean forward_backward;
 }pid_two_wheel;
 
 /* declare variables for PID control */
@@ -46,7 +48,8 @@ pid_two_wheel pid_left = {
   .Ki = 1,
   .Kd = 0.0,
   .abs_duration = 0.0,
-  .result = true
+  .result = true,
+  .forward_backward = true
 };
 
 pid_two_wheel pid_right = {
@@ -56,7 +59,8 @@ pid_two_wheel pid_right = {
   .Ki = 1,
   .Kd = 0.0,
   .abs_duration = 0.0,
-  .result = true
+  .result = true,
+  .forward_backward = true
 };
 
 /* declare for PID control */
@@ -65,12 +69,22 @@ PID myPID_right(&(pid_right.abs_duration), &(pid_right.val_output), &(pid_right.
 
 /* call back function for ros subscriber (command of left motor) */
 void motor_L_cb(const std_msgs::Int32& _msg){
-  pid_left.setpoint = (double)_msg.data;
+  if (_msg.data >= 0){
+    pid_left.forward_backward = true;
+  }else if (_msg.data < 0){
+    pid_left.forward_backward = false;
+  }
+  pid_left.setpoint = fabs((double)_msg.data);
 }
 
 /* call back function for ros subscriber (command of right motor) */
 void motor_R_cb(const std_msgs::Int32& _msg){
-  pid_right.setpoint = (double)_msg.data;
+  if (_msg.data >= 0){
+    pid_right.forward_backward = true;
+  }else if (_msg.data < 0){
+    pid_right.forward_backward = false;
+  }
+  pid_right.setpoint = fabs((double)_msg.data);
 }
 
 /* initialize node */
@@ -109,8 +123,16 @@ void setup()
 void loop()
 {
   /* actuate the motors */
-  forward_left();
-  forward_right();
+  if (pid_left.forward_backward == true){
+    forward_left();
+  }else if(pid_left.forward_backward == false){
+    backward_left();
+  }
+  if (pid_right.forward_backward == true){
+    forward_right();
+  }else if (pid_right.forward_backward == false){
+    backward_right();
+  }
 
   /* calculate control input by PID */
   pid_left.abs_duration = abs(encoder_left.duration);
