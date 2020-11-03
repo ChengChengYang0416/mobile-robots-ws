@@ -7,4 +7,5 @@
 subdirs("gtest")
 subdirs("checkpoint_1")
 subdirs("checkpoint_2")
+subdirs("checkpoint_3")
 subdirs("demo_publisher_subscriber")

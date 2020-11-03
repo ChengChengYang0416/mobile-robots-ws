@@ -313,6 +313,12 @@ checkpoint_2_BINARY_DIR:STATIC=/home/ncrl/mobile_robots_ws/build/checkpoint_2
 checkpoint_2_SOURCE_DIR:STATIC=/home/ncrl/mobile_robots_ws/src/checkpoint_2
 
 //Value Computed by CMake
+checkpoint_3_BINARY_DIR:STATIC=/home/ncrl/mobile_robots_ws/build/checkpoint_3
+
+//Value Computed by CMake
+checkpoint_3_SOURCE_DIR:STATIC=/home/ncrl/mobile_robots_ws/src/checkpoint_3
+
+//Value Computed by CMake
 ckeckpoint_2_BINARY_DIR:STATIC=/home/ncrl/mobile_robots_ws/build/ckeckpoint_2
 
 //Value Computed by CMake
@@ -527,7 +533,7 @@ CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_NM
 CMAKE_NM-ADVANCED:INTERNAL=1
 //number of local generators
-CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=7
+CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=8
 //ADVANCED property for variable: CMAKE_OBJCOPY
 CMAKE_OBJCOPY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_OBJDUMP

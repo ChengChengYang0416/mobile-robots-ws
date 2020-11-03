@@ -133,6 +133,7 @@ if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   include("/home/ncrl/mobile_robots_ws/build/gtest/cmake_install.cmake")
   include("/home/ncrl/mobile_robots_ws/build/checkpoint_1/cmake_install.cmake")
   include("/home/ncrl/mobile_robots_ws/build/checkpoint_2/cmake_install.cmake")
+  include("/home/ncrl/mobile_robots_ws/build/checkpoint_3/cmake_install.cmake")
   include("/home/ncrl/mobile_robots_ws/build/demo_publisher_subscriber/cmake_install.cmake")
 
 endif()
