@@ -67,14 +67,14 @@ set(checkpoint_3_CONFIG_INCLUDED TRUE)
 
 # set variables for source/devel/install prefixes
 if("FALSE" STREQUAL "TRUE")
-  set(checkpoint_3_SOURCE_PREFIX /home/ncrl/mobile_robots_ws/src/checkpoint_3)
-  set(checkpoint_3_DEVEL_PREFIX /home/ncrl/mobile_robots_ws/devel)
+  set(checkpoint_3_SOURCE_PREFIX /home/ncrl/workspace/ros_workspace/mobile_robots_ws/src/checkpoint_3)
+  set(checkpoint_3_DEVEL_PREFIX /home/ncrl/workspace/ros_workspace/mobile_robots_ws/devel)
   set(checkpoint_3_INSTALL_PREFIX "")
   set(checkpoint_3_PREFIX ${checkpoint_3_DEVEL_PREFIX})
 else()
   set(checkpoint_3_SOURCE_PREFIX "")
   set(checkpoint_3_DEVEL_PREFIX "")
-  set(checkpoint_3_INSTALL_PREFIX /home/ncrl/mobile_robots_ws/install)
+  set(checkpoint_3_INSTALL_PREFIX /home/ncrl/workspace/ros_workspace/mobile_robots_ws/install)
   set(checkpoint_3_PREFIX ${checkpoint_3_INSTALL_PREFIX})
 endif()
 
@@ -154,7 +154,7 @@ foreach(library ${libraries})
     set(lib_path "")
     set(lib "${library}-NOTFOUND")
     # since the path where the library is found is returned we have to iterate over the paths manually
-    foreach(path /home/ncrl/mobile_robots_ws/install/lib;/home/ncrl/mobile_robots_ws/devel/lib;/home/ncrl/catkin_ws/devel/lib;/opt/ros/melodic/lib)
+    foreach(path /home/ncrl/workspace/ros_workspace/mobile_robots_ws/install/lib;/home/ncrl/workspace/ros_workspace/multirotor_adaptive_ICL_control_ws/devel/lib;/home/ncrl/catkin_ws/devel/lib;/opt/ros/melodic/lib)
       find_library(lib ${library}
         PATHS ${path}
         NO_DEFAULT_PATH NO_CMAKE_FIND_ROOT_PATH)

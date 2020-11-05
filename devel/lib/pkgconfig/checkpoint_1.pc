@@ -1,4 +1,4 @@
-prefix=/home/ncrl/mobile_robots_ws/devel
+prefix=/home/ncrl/workspace/ros_workspace/mobile_robots_ws/devel
 
 Name: checkpoint_1
 Description: Description of checkpoint_1

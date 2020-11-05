@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/ncrl/mobile_robots_ws/src
+CMAKE_SOURCE_DIR = /home/ncrl/workspace/ros_workspace/mobile_robots_ws/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/ncrl/mobile_robots_ws/build
+CMAKE_BINARY_DIR = /home/ncrl/workspace/ros_workspace/mobile_robots_ws/build
 
 # Include any dependencies generated for this target.
 include checkpoint_2/CMakeFiles/motors_cmd_pub.dir/depend.make
@@ -58,17 +58,17 @@ include checkpoint_2/CMakeFiles/motors_cmd_pub.dir/progress.make
 include checkpoint_2/CMakeFiles/motors_cmd_pub.dir/flags.make
 
 checkpoint_2/CMakeFiles/motors_cmd_pub.dir/src/motors_cmd_pub.cpp.o: checkpoint_2/CMakeFiles/motors_cmd_pub.dir/flags.make
-checkpoint_2/CMakeFiles/motors_cmd_pub.dir/src/motors_cmd_pub.cpp.o: /home/ncrl/mobile_robots_ws/src/checkpoint_2/src/motors_cmd_pub.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ncrl/mobile_robots_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object checkpoint_2/CMakeFiles/motors_cmd_pub.dir/src/motors_cmd_pub.cpp.o"
-	cd /home/ncrl/mobile_robots_ws/build/checkpoint_2 && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/motors_cmd_pub.dir/src/motors_cmd_pub.cpp.o -c /home/ncrl/mobile_robots_ws/src/checkpoint_2/src/motors_cmd_pub.cpp
+checkpoint_2/CMakeFiles/motors_cmd_pub.dir/src/motors_cmd_pub.cpp.o: /home/ncrl/workspace/ros_workspace/mobile_robots_ws/src/checkpoint_2/src/motors_cmd_pub.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ncrl/workspace/ros_workspace/mobile_robots_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object checkpoint_2/CMakeFiles/motors_cmd_pub.dir/src/motors_cmd_pub.cpp.o"
+	cd /home/ncrl/workspace/ros_workspace/mobile_robots_ws/build/checkpoint_2 && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/motors_cmd_pub.dir/src/motors_cmd_pub.cpp.o -c /home/ncrl/workspace/ros_workspace/mobile_robots_ws/src/checkpoint_2/src/motors_cmd_pub.cpp
 
 checkpoint_2/CMakeFiles/motors_cmd_pub.dir/src/motors_cmd_pub.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/motors_cmd_pub.dir/src/motors_cmd_pub.cpp.i"
-	cd /home/ncrl/mobile_robots_ws/build/checkpoint_2 && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ncrl/mobile_robots_ws/src/checkpoint_2/src/motors_cmd_pub.cpp > CMakeFiles/motors_cmd_pub.dir/src/motors_cmd_pub.cpp.i
+	cd /home/ncrl/workspace/ros_workspace/mobile_robots_ws/build/checkpoint_2 && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ncrl/workspace/ros_workspace/mobile_robots_ws/src/checkpoint_2/src/motors_cmd_pub.cpp > CMakeFiles/motors_cmd_pub.dir/src/motors_cmd_pub.cpp.i
 
 checkpoint_2/CMakeFiles/motors_cmd_pub.dir/src/motors_cmd_pub.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/motors_cmd_pub.dir/src/motors_cmd_pub.cpp.s"
-	cd /home/ncrl/mobile_robots_ws/build/checkpoint_2 && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ncrl/mobile_robots_ws/src/checkpoint_2/src/motors_cmd_pub.cpp -o CMakeFiles/motors_cmd_pub.dir/src/motors_cmd_pub.cpp.s
+	cd /home/ncrl/workspace/ros_workspace/mobile_robots_ws/build/checkpoint_2 && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ncrl/workspace/ros_workspace/mobile_robots_ws/src/checkpoint_2/src/motors_cmd_pub.cpp -o CMakeFiles/motors_cmd_pub.dir/src/motors_cmd_pub.cpp.s
 
 checkpoint_2/CMakeFiles/motors_cmd_pub.dir/src/motors_cmd_pub.cpp.o.requires:
 
@@ -88,32 +88,32 @@ motors_cmd_pub_OBJECTS = \
 # External object files for target motors_cmd_pub
 motors_cmd_pub_EXTERNAL_OBJECTS =
 
-/home/ncrl/mobile_robots_ws/devel/lib/checkpoint_2/motors_cmd_pub: checkpoint_2/CMakeFiles/motors_cmd_pub.dir/src/motors_cmd_pub.cpp.o
-/home/ncrl/mobile_robots_ws/devel/lib/checkpoint_2/motors_cmd_pub: checkpoint_2/CMakeFiles/motors_cmd_pub.dir/build.make
-/home/ncrl/mobile_robots_ws/devel/lib/checkpoint_2/motors_cmd_pub: /opt/ros/melodic/lib/libroscpp.so
-/home/ncrl/mobile_robots_ws/devel/lib/checkpoint_2/motors_cmd_pub: /usr/lib/x86_64-linux-gnu/libboost_filesystem.so
-/home/ncrl/mobile_robots_ws/devel/lib/checkpoint_2/motors_cmd_pub: /opt/ros/melodic/lib/librosconsole.so
-/home/ncrl/mobile_robots_ws/devel/lib/checkpoint_2/motors_cmd_pub: /opt/ros/melodic/lib/librosconsole_log4cxx.so
-/home/ncrl/mobile_robots_ws/devel/lib/checkpoint_2/motors_cmd_pub: /opt/ros/melodic/lib/librosconsole_backend_interface.so
-/home/ncrl/mobile_robots_ws/devel/lib/checkpoint_2/motors_cmd_pub: /usr/lib/x86_64-linux-gnu/liblog4cxx.so
-/home/ncrl/mobile_robots_ws/devel/lib/checkpoint_2/motors_cmd_pub: /usr/lib/x86_64-linux-gnu/libboost_regex.so
-/home/ncrl/mobile_robots_ws/devel/lib/checkpoint_2/motors_cmd_pub: /opt/ros/melodic/lib/libxmlrpcpp.so
-/home/ncrl/mobile_robots_ws/devel/lib/checkpoint_2/motors_cmd_pub: /opt/ros/melodic/lib/libroscpp_serialization.so
-/home/ncrl/mobile_robots_ws/devel/lib/checkpoint_2/motors_cmd_pub: /opt/ros/melodic/lib/librostime.so
-/home/ncrl/mobile_robots_ws/devel/lib/checkpoint_2/motors_cmd_pub: /opt/ros/melodic/lib/libcpp_common.so
-/home/ncrl/mobile_robots_ws/devel/lib/checkpoint_2/motors_cmd_pub: /usr/lib/x86_64-linux-gnu/libboost_system.so
-/home/ncrl/mobile_robots_ws/devel/lib/checkpoint_2/motors_cmd_pub: /usr/lib/x86_64-linux-gnu/libboost_thread.so
-/home/ncrl/mobile_robots_ws/devel/lib/checkpoint_2/motors_cmd_pub: /usr/lib/x86_64-linux-gnu/libboost_chrono.so
-/home/ncrl/mobile_robots_ws/devel/lib/checkpoint_2/motors_cmd_pub: /usr/lib/x86_64-linux-gnu/libboost_date_time.so
-/home/ncrl/mobile_robots_ws/devel/lib/checkpoint_2/motors_cmd_pub: /usr/lib/x86_64-linux-gnu/libboost_atomic.so
-/home/ncrl/mobile_robots_ws/devel/lib/checkpoint_2/motors_cmd_pub: /usr/lib/x86_64-linux-gnu/libpthread.so
-/home/ncrl/mobile_robots_ws/devel/lib/checkpoint_2/motors_cmd_pub: /usr/lib/x86_64-linux-gnu/libconsole_bridge.so.0.4
-/home/ncrl/mobile_robots_ws/devel/lib/checkpoint_2/motors_cmd_pub: checkpoint_2/CMakeFiles/motors_cmd_pub.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/ncrl/mobile_robots_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable /home/ncrl/mobile_robots_ws/devel/lib/checkpoint_2/motors_cmd_pub"
-	cd /home/ncrl/mobile_robots_ws/build/checkpoint_2 && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/motors_cmd_pub.dir/link.txt --verbose=$(VERBOSE)
+/home/ncrl/workspace/ros_workspace/mobile_robots_ws/devel/lib/checkpoint_2/motors_cmd_pub: checkpoint_2/CMakeFiles/motors_cmd_pub.dir/src/motors_cmd_pub.cpp.o
+/home/ncrl/workspace/ros_workspace/mobile_robots_ws/devel/lib/checkpoint_2/motors_cmd_pub: checkpoint_2/CMakeFiles/motors_cmd_pub.dir/build.make
+/home/ncrl/workspace/ros_workspace/mobile_robots_ws/devel/lib/checkpoint_2/motors_cmd_pub: /opt/ros/melodic/lib/libroscpp.so
+/home/ncrl/workspace/ros_workspace/mobile_robots_ws/devel/lib/checkpoint_2/motors_cmd_pub: /usr/lib/x86_64-linux-gnu/libboost_filesystem.so
+/home/ncrl/workspace/ros_workspace/mobile_robots_ws/devel/lib/checkpoint_2/motors_cmd_pub: /opt/ros/melodic/lib/librosconsole.so
+/home/ncrl/workspace/ros_workspace/mobile_robots_ws/devel/lib/checkpoint_2/motors_cmd_pub: /opt/ros/melodic/lib/librosconsole_log4cxx.so
+/home/ncrl/workspace/ros_workspace/mobile_robots_ws/devel/lib/checkpoint_2/motors_cmd_pub: /opt/ros/melodic/lib/librosconsole_backend_interface.so
+/home/ncrl/workspace/ros_workspace/mobile_robots_ws/devel/lib/checkpoint_2/motors_cmd_pub: /usr/lib/x86_64-linux-gnu/liblog4cxx.so
+/home/ncrl/workspace/ros_workspace/mobile_robots_ws/devel/lib/checkpoint_2/motors_cmd_pub: /usr/lib/x86_64-linux-gnu/libboost_regex.so
+/home/ncrl/workspace/ros_workspace/mobile_robots_ws/devel/lib/checkpoint_2/motors_cmd_pub: /opt/ros/melodic/lib/libxmlrpcpp.so
+/home/ncrl/workspace/ros_workspace/mobile_robots_ws/devel/lib/checkpoint_2/motors_cmd_pub: /opt/ros/melodic/lib/libroscpp_serialization.so
+/home/ncrl/workspace/ros_workspace/mobile_robots_ws/devel/lib/checkpoint_2/motors_cmd_pub: /opt/ros/melodic/lib/librostime.so
+/home/ncrl/workspace/ros_workspace/mobile_robots_ws/devel/lib/checkpoint_2/motors_cmd_pub: /opt/ros/melodic/lib/libcpp_common.so
+/home/ncrl/workspace/ros_workspace/mobile_robots_ws/devel/lib/checkpoint_2/motors_cmd_pub: /usr/lib/x86_64-linux-gnu/libboost_system.so
+/home/ncrl/workspace/ros_workspace/mobile_robots_ws/devel/lib/checkpoint_2/motors_cmd_pub: /usr/lib/x86_64-linux-gnu/libboost_thread.so
+/home/ncrl/workspace/ros_workspace/mobile_robots_ws/devel/lib/checkpoint_2/motors_cmd_pub: /usr/lib/x86_64-linux-gnu/libboost_chrono.so
+/home/ncrl/workspace/ros_workspace/mobile_robots_ws/devel/lib/checkpoint_2/motors_cmd_pub: /usr/lib/x86_64-linux-gnu/libboost_date_time.so
+/home/ncrl/workspace/ros_workspace/mobile_robots_ws/devel/lib/checkpoint_2/motors_cmd_pub: /usr/lib/x86_64-linux-gnu/libboost_atomic.so
+/home/ncrl/workspace/ros_workspace/mobile_robots_ws/devel/lib/checkpoint_2/motors_cmd_pub: /usr/lib/x86_64-linux-gnu/libpthread.so
+/home/ncrl/workspace/ros_workspace/mobile_robots_ws/devel/lib/checkpoint_2/motors_cmd_pub: /usr/lib/x86_64-linux-gnu/libconsole_bridge.so.0.4
+/home/ncrl/workspace/ros_workspace/mobile_robots_ws/devel/lib/checkpoint_2/motors_cmd_pub: checkpoint_2/CMakeFiles/motors_cmd_pub.dir/link.txt
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/ncrl/workspace/ros_workspace/mobile_robots_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable /home/ncrl/workspace/ros_workspace/mobile_robots_ws/devel/lib/checkpoint_2/motors_cmd_pub"
+	cd /home/ncrl/workspace/ros_workspace/mobile_robots_ws/build/checkpoint_2 && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/motors_cmd_pub.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
-checkpoint_2/CMakeFiles/motors_cmd_pub.dir/build: /home/ncrl/mobile_robots_ws/devel/lib/checkpoint_2/motors_cmd_pub
+checkpoint_2/CMakeFiles/motors_cmd_pub.dir/build: /home/ncrl/workspace/ros_workspace/mobile_robots_ws/devel/lib/checkpoint_2/motors_cmd_pub
 
 .PHONY : checkpoint_2/CMakeFiles/motors_cmd_pub.dir/build
 
@@ -122,10 +122,10 @@ checkpoint_2/CMakeFiles/motors_cmd_pub.dir/requires: checkpoint_2/CMakeFiles/mot
 .PHONY : checkpoint_2/CMakeFiles/motors_cmd_pub.dir/requires
 
 checkpoint_2/CMakeFiles/motors_cmd_pub.dir/clean:
-	cd /home/ncrl/mobile_robots_ws/build/checkpoint_2 && $(CMAKE_COMMAND) -P CMakeFiles/motors_cmd_pub.dir/cmake_clean.cmake
+	cd /home/ncrl/workspace/ros_workspace/mobile_robots_ws/build/checkpoint_2 && $(CMAKE_COMMAND) -P CMakeFiles/motors_cmd_pub.dir/cmake_clean.cmake
 .PHONY : checkpoint_2/CMakeFiles/motors_cmd_pub.dir/clean
 
 checkpoint_2/CMakeFiles/motors_cmd_pub.dir/depend:
-	cd /home/ncrl/mobile_robots_ws/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/ncrl/mobile_robots_ws/src /home/ncrl/mobile_robots_ws/src/checkpoint_2 /home/ncrl/mobile_robots_ws/build /home/ncrl/mobile_robots_ws/build/checkpoint_2 /home/ncrl/mobile_robots_ws/build/checkpoint_2/CMakeFiles/motors_cmd_pub.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/ncrl/workspace/ros_workspace/mobile_robots_ws/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/ncrl/workspace/ros_workspace/mobile_robots_ws/src /home/ncrl/workspace/ros_workspace/mobile_robots_ws/src/checkpoint_2 /home/ncrl/workspace/ros_workspace/mobile_robots_ws/build /home/ncrl/workspace/ros_workspace/mobile_robots_ws/build/checkpoint_2 /home/ncrl/workspace/ros_workspace/mobile_robots_ws/build/checkpoint_2/CMakeFiles/motors_cmd_pub.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : checkpoint_2/CMakeFiles/motors_cmd_pub.dir/depend
 

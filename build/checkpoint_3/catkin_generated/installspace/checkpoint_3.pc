@@ -1,4 +1,4 @@
-prefix=/home/ncrl/mobile_robots_ws/install
+prefix=/home/ncrl/workspace/ros_workspace/mobile_robots_ws/install
 
 Name: checkpoint_3
 Description: Description of checkpoint_3

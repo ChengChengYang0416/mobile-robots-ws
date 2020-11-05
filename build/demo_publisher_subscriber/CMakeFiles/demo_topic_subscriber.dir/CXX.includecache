@@ -6,11 +6,11 @@
 
 #IncludeRegexTransform: 
 
-/home/ncrl/mobile_robots_ws/src/demo_publisher_subscriber/src/demo_topic_subscriber.cpp
+/home/ncrl/workspace/ros_workspace/mobile_robots_ws/src/demo_publisher_subscriber/src/demo_topic_subscriber.cpp
 ros/ros.h
-/home/ncrl/mobile_robots_ws/src/demo_publisher_subscriber/src/ros/ros.h
+/home/ncrl/workspace/ros_workspace/mobile_robots_ws/src/demo_publisher_subscriber/src/ros/ros.h
 std_msgs/Int32.h
-/home/ncrl/mobile_robots_ws/src/demo_publisher_subscriber/src/std_msgs/Int32.h
+/home/ncrl/workspace/ros_workspace/mobile_robots_ws/src/demo_publisher_subscriber/src/std_msgs/Int32.h
 iostream
 -
 

@@ -6,11 +6,11 @@
 
 #IncludeRegexTransform: 
 
-/home/ncrl/mobile_robots_ws/src/checkpoint_1/src/cp_1_publisher.cpp
+/home/ncrl/workspace/ros_workspace/mobile_robots_ws/src/checkpoint_1/src/cp_1_publisher.cpp
 ros/ros.h
-/home/ncrl/mobile_robots_ws/src/checkpoint_1/src/ros/ros.h
+/home/ncrl/workspace/ros_workspace/mobile_robots_ws/src/checkpoint_1/src/ros/ros.h
 std_msgs/Int32.h
-/home/ncrl/mobile_robots_ws/src/checkpoint_1/src/std_msgs/Int32.h
+/home/ncrl/workspace/ros_workspace/mobile_robots_ws/src/checkpoint_1/src/std_msgs/Int32.h
 iostream
 -
 stdio.h

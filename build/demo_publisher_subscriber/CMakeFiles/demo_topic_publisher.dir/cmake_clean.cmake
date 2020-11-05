@@ -1,7 +1,7 @@
 file(REMOVE_RECURSE
   "CMakeFiles/demo_topic_publisher.dir/src/demo_topic_publisher.cpp.o"
-  "/home/ncrl/mobile_robots_ws/devel/lib/demo_publisher_subscriber/demo_topic_publisher.pdb"
-  "/home/ncrl/mobile_robots_ws/devel/lib/demo_publisher_subscriber/demo_topic_publisher"
+  "/home/ncrl/workspace/ros_workspace/mobile_robots_ws/devel/lib/demo_publisher_subscriber/demo_topic_publisher.pdb"
+  "/home/ncrl/workspace/ros_workspace/mobile_robots_ws/devel/lib/demo_publisher_subscriber/demo_topic_publisher"
 )
 
 # Per-language clean rules from dependency scanning.

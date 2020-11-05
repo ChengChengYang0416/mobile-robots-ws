@@ -1,2 +1,2 @@
 - setup-file:
-    local-name: /home/ncrl/mobile_robots_ws/devel/setup.sh
+    local-name: /home/ncrl/workspace/ros_workspace/mobile_robots_ws/devel/setup.sh
