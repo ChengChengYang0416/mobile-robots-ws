@@ -12,7 +12,7 @@
 
 #define touch_pin_L 12        // connected to mid pin of touch sensor
 #define touch_pin_R 13        // connected to mid pin of touch sensor
-#define touch_pin_M A0        // connected to mid pin of touch sensor
+#define touch_pin_M A1        // connected to mid pin of touch sensor
 
 const byte encoder0pinA = 2;  // A pin -> the interrupt pin 0 (pin 2)
 const byte encoder0pinB = 7;  // B pin -> the digital pin 7

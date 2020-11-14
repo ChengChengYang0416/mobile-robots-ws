@@ -1,4 +1,4 @@
-#define photo_sensor_pin A1
+#define photo_sensor_pin A0
 
 int val = 0;
 
