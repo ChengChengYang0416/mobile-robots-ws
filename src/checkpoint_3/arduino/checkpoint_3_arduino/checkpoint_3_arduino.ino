@@ -124,6 +124,14 @@ void loop()
     delay(800);
   }
 
+  if (digitalRead(touch_pin_L) == HIGH){
+    touch_left_sensor();
+  }else if(digitalRead(touch_pin_R) == HIGH){
+    touch_right_sensor();
+  }else{
+    motor_forward();
+  }
+
   /* calculate control input by PID */
   pid_left.abs_duration = abs(encoder_left.duration);
   pid_left.result = myPID_left.Compute();
@@ -211,10 +219,10 @@ void motor_backward() //Motor reverse
 {
   digitalWrite(IN1, HIGH);
   digitalWrite(IN2, LOW);
-  analogWrite(ENA, pid_left.val_output);
+  analogWrite(ENA, 200);
   digitalWrite(IN3, HIGH);
   digitalWrite(IN4, LOW);
-  analogWrite(ENB, pid_right.val_output);
+  analogWrite(ENB, 200);
 }
 
 void motor_turn_left()  // turn left
@@ -251,9 +259,9 @@ void touch_left_sensor(){
   motor_stop();
   delay(500);
   motor_backward();
-  delay(1500);
-  motor_turn_right();
   delay(1000);
+  //motor_turn_right();
+  //delay(1000);
   motor_stop();
   delay(500);
 }
@@ -262,9 +270,9 @@ void touch_right_sensor(){
   motor_stop();
   delay(500);
   motor_backward();
-  delay(1500);
-  motor_turn_left();
   delay(1000);
+  //motor_turn_left();
+  //delay(1000);
   motor_stop();
   delay(500);
 }
