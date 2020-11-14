@@ -110,11 +110,6 @@ void loop()
   }else{
     motor_turn_left();
   }
-  Serial.print("setpoint : ");
-  Serial.print(pid_left.setpoint);
-  Serial.print(" ");
-  Serial.println(pid_right.setpoint);
-  Serial.println(val);
   
   /* calculate control input by PID */
   pid_left.abs_duration = abs(encoder_left.duration);
@@ -125,14 +120,10 @@ void loop()
   /* print motor speed */
   if(pid_left.result)
   {
-    //Serial.print("Pulse left and right : ");
-    //Serial.print(encoder_left.duration);
     encoder_left.duration = 0;
   }
   if(pid_right.result)
   {
-    //Serial.print(" ");
-    //Serial.println(encoder_right.duration);
     encoder_right.duration = 0;
   }
 }
