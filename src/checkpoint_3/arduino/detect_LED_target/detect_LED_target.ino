@@ -102,15 +102,27 @@ void setup()
   EncoderInit();
 }
 
+int counter = 0;
+
 void loop()
 {
   val = analogRead(photo_sensor_pin);
   if (val < 100){
     motor_stop();
+    delay(1000);
+    motor_forward();
+    delay(1000);
   }else{
     motor_turn_left();
+    counter++;
   }
   
+  if (counter > 1000){
+    counter = 0;
+    motor_forward();
+    delay(800);
+  }
+
   /* calculate control input by PID */
   pid_left.abs_duration = abs(encoder_left.duration);
   pid_left.result = myPID_left.Compute();
@@ -188,10 +200,10 @@ void motor_forward()  //Motor Forward
 {
   digitalWrite(IN1, LOW);
   digitalWrite(IN2, HIGH);
-  analogWrite(ENA, pid_left.val_output);
+  analogWrite(ENA, 200);
   digitalWrite(IN3, LOW);
   digitalWrite(IN4, HIGH);
-  analogWrite(ENB, pid_right.val_output);
+  analogWrite(ENB, 200);
 }
 
 void motor_backward() //Motor reverse
@@ -208,7 +220,7 @@ void motor_turn_left()  // turn left
 {
   digitalWrite(IN1, LOW);
   digitalWrite(IN2, LOW);
-  analogWrite(ENA, pid_left.val_output);
+  analogWrite(ENA, 0);
   digitalWrite(IN3, LOW);
   digitalWrite(IN4, HIGH);
   analogWrite(ENB, pid_right.val_output);
@@ -221,15 +233,17 @@ void motor_turn_right()  // turn right
   analogWrite(ENA, pid_left.val_output);
   digitalWrite(IN3, LOW);
   digitalWrite(IN4, LOW);
-  analogWrite(ENB, pid_right.val_output);
+  analogWrite(ENB, 0);
 }
 
 void motor_stop() //Motor stops
 {
   digitalWrite(IN1, LOW);
   digitalWrite(IN2, LOW);
+  analogWrite(ENA, 0);
   digitalWrite(IN3, LOW);
   digitalWrite(IN4, LOW);
+  analogWrite(ENB, 0);
 }
 
 void touch_left_sensor(){
