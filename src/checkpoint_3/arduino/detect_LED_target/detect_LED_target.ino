@@ -114,6 +114,7 @@ void loop()
     delay(1000);
   }else{
     motor_turn_left();
+    delay(5);
     counter++;
   }
   
