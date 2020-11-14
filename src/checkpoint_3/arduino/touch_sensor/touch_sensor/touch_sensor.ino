@@ -10,8 +10,16 @@ void setup(){
 }
 
 void loop(){
+    if (digitalRead(touch_pin_L) == HIGH){
+        Serial.println("left touched");
+        delay(200);
+    }
+    if (digitalRead(touch_pin_R) == HIGH){
+        Serial.println("right touched");
+        delay(200);
+    }
     if (digitalRead(touch_pin_M) == HIGH){
-        Serial.println("touched");
-        delay(500);
+        Serial.println("middle touched");
+        delay(200);
     }
 }
