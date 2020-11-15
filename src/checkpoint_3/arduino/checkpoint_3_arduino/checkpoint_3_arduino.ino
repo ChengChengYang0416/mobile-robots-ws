@@ -103,49 +103,58 @@ void setup()
 }
 
 int counter = 0;
+int get_target = 0;
 
 void loop()
 {
-  val = analogRead(photo_sensor_pin);
-  if (val < 100){
+  if (digitalRead(touch_pin_M) == HIGH){
+    get_target = 1;
+  }
+
+  if (get_target){
     motor_stop();
-    delay(1000);
-    motor_forward();
-    delay(1000);
   }else{
-    motor_turn_left();
-    delay(5);
-    counter++;
-  }
+    val = analogRead(photo_sensor_pin);
+    if (val < 100){
+      motor_stop();
+      delay(1000);
+      motor_forward();
+      delay(1000);
+    }else{
+      motor_turn_left();
+      delay(5);
+      counter++;
+    }
   
-  if (counter > 1000){
-    counter = 0;
-    motor_forward();
-    delay(800);
-  }
+    if (counter > 1000){
+      counter = 0;
+      motor_forward();
+      delay(800);
+    }
 
-  if (digitalRead(touch_pin_L) == HIGH){
-    touch_left_sensor();
-  }else if(digitalRead(touch_pin_R) == HIGH){
-    touch_right_sensor();
-  }else{
-    motor_forward();
-  }
+    if (digitalRead(touch_pin_L) == HIGH){
+      touch_left_sensor();
+    }else if(digitalRead(touch_pin_R) == HIGH){
+      touch_right_sensor();
+    }else{
+      motor_forward();
+    }
 
-  /* calculate control input by PID */
-  pid_left.abs_duration = abs(encoder_left.duration);
-  pid_left.result = myPID_left.Compute();
-  pid_right.abs_duration = abs(encoder_right.duration);
-  pid_right.result = myPID_right.Compute();
+    /* calculate control input by PID */
+    pid_left.abs_duration = abs(encoder_left.duration);
+    pid_left.result = myPID_left.Compute();
+    pid_right.abs_duration = abs(encoder_right.duration);
+    pid_right.result = myPID_right.Compute();
 
-  /* print motor speed */
-  if(pid_left.result)
-  {
-    encoder_left.duration = 0;
-  }
-  if(pid_right.result)
-  {
-    encoder_right.duration = 0;
+    /* print motor speed */
+    if(pid_left.result)
+    {
+      encoder_left.duration = 0;
+    }
+    if(pid_right.result)
+    {
+      encoder_right.duration = 0;
+    }
   }
 }
 
