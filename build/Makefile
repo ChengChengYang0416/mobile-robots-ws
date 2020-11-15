@@ -519,6 +519,19 @@ motors_cmd_pub/fast:
 .PHONY : motors_cmd_pub/fast
 
 #=============================================================================
+# Target rules for targets named cp3_start
+
+# Build rule for target.
+cp3_start: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 cp3_start
+.PHONY : cp3_start
+
+# fast build rule for target.
+cp3_start/fast:
+	$(MAKE) -f checkpoint_3/CMakeFiles/cp3_start.dir/build.make checkpoint_3/CMakeFiles/cp3_start.dir/build
+.PHONY : cp3_start/fast
+
+#=============================================================================
 # Target rules for targets named demo_topic_subscriber
 
 # Build rule for target.
@@ -584,6 +597,7 @@ help:
 	@echo "... roscpp_generate_messages_nodejs"
 	@echo "... std_msgs_generate_messages_py"
 	@echo "... motors_cmd_pub"
+	@echo "... cp3_start"
 	@echo "... demo_topic_subscriber"
 	@echo "... demo_topic_publisher"
 .PHONY : help

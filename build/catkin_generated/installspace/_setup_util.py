@@ -268,7 +268,7 @@ if __name__ == '__main__':
 
         if not args.local:
             # environment at generation time
-            CMAKE_PREFIX_PATH = '/home/ncrl/workspace/ros_workspace/multirotor_adaptive_ICL_control_ws/devel;/home/ncrl/catkin_ws/devel;/opt/ros/melodic'.split(';')
+            CMAKE_PREFIX_PATH = '/home/ncrl/workspace/ros_workspace/multirotor_with_flexible_mechanisms_ws/devel;/home/ncrl/workspace/ros_workspace/multirotor_geometry_control_ws/devel;/home/ncrl/workspace/ros_workspace/multirotor_adaptive_ICL_control_ws/devel;/home/ncrl/workspace/ros_workspace/mobile_robots_ws/devel;/home/ncrl/catkin_ws/devel;/opt/ros/melodic'.split(';')
         else:
             # don't consider any other prefix path than this one
             CMAKE_PREFIX_PATH = []

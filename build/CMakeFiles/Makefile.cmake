@@ -221,6 +221,7 @@ set(CMAKE_DEPEND_INFO_FILES
   "checkpoint_1/CMakeFiles/roscpp_generate_messages_nodejs.dir/DependInfo.cmake"
   "checkpoint_1/CMakeFiles/std_msgs_generate_messages_py.dir/DependInfo.cmake"
   "checkpoint_2/CMakeFiles/motors_cmd_pub.dir/DependInfo.cmake"
+  "checkpoint_3/CMakeFiles/cp3_start.dir/DependInfo.cmake"
   "demo_publisher_subscriber/CMakeFiles/demo_topic_subscriber.dir/DependInfo.cmake"
   "demo_publisher_subscriber/CMakeFiles/demo_topic_publisher.dir/DependInfo.cmake"
   )

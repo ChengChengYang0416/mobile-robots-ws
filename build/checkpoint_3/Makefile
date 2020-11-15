@@ -68,38 +68,6 @@ install/strip/fast: preinstall/fast
 	/usr/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
 .PHONY : install/strip/fast
 
-# Special rule for the target edit_cache
-edit_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	/usr/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
-.PHONY : edit_cache
-
-# Special rule for the target edit_cache
-edit_cache/fast: edit_cache
-
-.PHONY : edit_cache/fast
-
-# Special rule for the target list_install_components
-list_install_components:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Available install components are: \"Unspecified\""
-.PHONY : list_install_components
-
-# Special rule for the target list_install_components
-list_install_components/fast: list_install_components
-
-.PHONY : list_install_components/fast
-
-# Special rule for the target test
-test:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running tests..."
-	/usr/bin/ctest --force-new-ctest-process $(ARGS)
-.PHONY : test
-
-# Special rule for the target test
-test/fast: test
-
-.PHONY : test/fast
-
 # Special rule for the target install/local
 install/local: preinstall
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
@@ -112,6 +80,27 @@ install/local/fast: preinstall/fast
 	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
 .PHONY : install/local/fast
 
+# Special rule for the target test
+test:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running tests..."
+	/usr/bin/ctest --force-new-ctest-process $(ARGS)
+.PHONY : test
+
+# Special rule for the target test
+test/fast: test
+
+.PHONY : test/fast
+
+# Special rule for the target list_install_components
+list_install_components:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Available install components are: \"Unspecified\""
+.PHONY : list_install_components
+
+# Special rule for the target list_install_components
+list_install_components/fast: list_install_components
+
+.PHONY : list_install_components/fast
+
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
@@ -122,6 +111,17 @@ rebuild_cache:
 rebuild_cache/fast: rebuild_cache
 
 .PHONY : rebuild_cache/fast
+
+# Special rule for the target edit_cache
+edit_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
+	/usr/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+.PHONY : edit_cache
+
+# Special rule for the target edit_cache
+edit_cache/fast: edit_cache
+
+.PHONY : edit_cache/fast
 
 # Special rule for the target install
 install: preinstall
@@ -167,6 +167,48 @@ depend:
 	cd /home/ncrl/workspace/ros_workspace/mobile_robots_ws/build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
+# Convenience name for target.
+checkpoint_3/CMakeFiles/cp3_start.dir/rule:
+	cd /home/ncrl/workspace/ros_workspace/mobile_robots_ws/build && $(MAKE) -f CMakeFiles/Makefile2 checkpoint_3/CMakeFiles/cp3_start.dir/rule
+.PHONY : checkpoint_3/CMakeFiles/cp3_start.dir/rule
+
+# Convenience name for target.
+cp3_start: checkpoint_3/CMakeFiles/cp3_start.dir/rule
+
+.PHONY : cp3_start
+
+# fast build rule for target.
+cp3_start/fast:
+	cd /home/ncrl/workspace/ros_workspace/mobile_robots_ws/build && $(MAKE) -f checkpoint_3/CMakeFiles/cp3_start.dir/build.make checkpoint_3/CMakeFiles/cp3_start.dir/build
+.PHONY : cp3_start/fast
+
+src/cp3_start.o: src/cp3_start.cpp.o
+
+.PHONY : src/cp3_start.o
+
+# target to build an object file
+src/cp3_start.cpp.o:
+	cd /home/ncrl/workspace/ros_workspace/mobile_robots_ws/build && $(MAKE) -f checkpoint_3/CMakeFiles/cp3_start.dir/build.make checkpoint_3/CMakeFiles/cp3_start.dir/src/cp3_start.cpp.o
+.PHONY : src/cp3_start.cpp.o
+
+src/cp3_start.i: src/cp3_start.cpp.i
+
+.PHONY : src/cp3_start.i
+
+# target to preprocess a source file
+src/cp3_start.cpp.i:
+	cd /home/ncrl/workspace/ros_workspace/mobile_robots_ws/build && $(MAKE) -f checkpoint_3/CMakeFiles/cp3_start.dir/build.make checkpoint_3/CMakeFiles/cp3_start.dir/src/cp3_start.cpp.i
+.PHONY : src/cp3_start.cpp.i
+
+src/cp3_start.s: src/cp3_start.cpp.s
+
+.PHONY : src/cp3_start.s
+
+# target to generate assembly for a file
+src/cp3_start.cpp.s:
+	cd /home/ncrl/workspace/ros_workspace/mobile_robots_ws/build && $(MAKE) -f checkpoint_3/CMakeFiles/cp3_start.dir/build.make checkpoint_3/CMakeFiles/cp3_start.dir/src/cp3_start.cpp.s
+.PHONY : src/cp3_start.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -174,12 +216,16 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... install/strip"
-	@echo "... edit_cache"
-	@echo "... list_install_components"
-	@echo "... test"
 	@echo "... install/local"
+	@echo "... test"
+	@echo "... list_install_components"
+	@echo "... cp3_start"
 	@echo "... rebuild_cache"
+	@echo "... edit_cache"
 	@echo "... install"
+	@echo "... src/cp3_start.o"
+	@echo "... src/cp3_start.i"
+	@echo "... src/cp3_start.s"
 .PHONY : help
 
 
