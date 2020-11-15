@@ -119,6 +119,10 @@ void loop()
       motor_stop();
       delay(1000);
       motor_forward();
+      if (digitalRead(touch_pin_M) == HIGH){
+        get_target = 1;
+        motor_stop();
+      }
       delay(1000);
     }else{
       motor_turn_left();
