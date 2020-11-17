@@ -123,40 +123,54 @@ int get_target = 0;
 void loop()
 {
   if (start){
+    /* arduino recieve the starting signal */
     if (digitalRead(touch_pin_M) == HIGH){
+      /* check if the middle touch sensor trigger */
       get_target = 1;
     }
 
     if (get_target){
+      /* middle touch sensor trigger, the robot stop */
       motor_stop();
     }else{
+      /* check if the robot detect the LED target */
       val = analogRead(photo_sensor_pin);
       if (val < 100){
+        /* detect the LED target */
         motor_stop();
         delay(1000);
         motor_forward();
+
+        /* check if the middle touch sensor trigger */
         if (digitalRead(touch_pin_M) == HIGH){
+          /* middle touch sensor trigger */
           get_target = 1;
           motor_stop();
         }
         delay(1000);
       }else{
+        /* has not detect any LED target, turn around to detect if there exists LED target */
         motor_turn_left();
         delay(5);
         counter++;
       }
-  
+
       if (counter > 1000){
+        /* can not detect LED target, go straight for 0.8 seconds */
         counter = 0;
         motor_forward();
         delay(800);
       }
 
+      /* check if the robot touch the obstacle */
       if (digitalRead(touch_pin_L) == HIGH){
+        /* robot touch the obstacle on the left hand side */
         touch_left_sensor();
       }else if(digitalRead(touch_pin_R) == HIGH){
+        /* robot touch the obstacle on the right hand side */
         touch_right_sensor();
       }else{
+        /* robot touch nothing, keep going */
         motor_forward();
       }
 
@@ -166,7 +180,7 @@ void loop()
       pid_right.abs_duration = abs(encoder_right.duration);
       pid_right.result = myPID_right.Compute();
 
-      /* print motor speed */
+      /* reset duration of encoder */
       if(pid_left.result)
       {
         encoder_left.duration = 0;
@@ -177,6 +191,7 @@ void loop()
       }
     } 
   }else{
+    /* default:static. Or arduino recieve the stopping signal */
     motor_stop();
   }
 
