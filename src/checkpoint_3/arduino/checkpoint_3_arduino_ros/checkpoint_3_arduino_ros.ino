@@ -124,11 +124,13 @@ void loop()
 {
   if (start){
     /* arduino recieve the starting signal */
+    /* check if the middle touch sensor trigger */
     if (digitalRead(touch_pin_M) == HIGH){
-      /* check if the middle touch sensor trigger */
+      /* middle touch sensor trigger */
       get_target = 1;
     }
 
+    /* check if the robot get the LED target */
     if (get_target){
       /* middle touch sensor trigger, the robot stop */
       motor_stop();
