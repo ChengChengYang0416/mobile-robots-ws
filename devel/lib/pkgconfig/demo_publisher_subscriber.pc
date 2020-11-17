@@ -1,8 +1,0 @@
-prefix=/home/ncrl/workspace/ros_workspace/mobile_robots_ws/devel
-
-Name: demo_publisher_subscriber
-Description: Description of demo_publisher_subscriber
-Version: 0.0.0
-Cflags: 
-Libs: -L${prefix}/lib 
-Requires: 

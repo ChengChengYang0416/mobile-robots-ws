@@ -1,8 +1,0 @@
-prefix=/home/ncrl/workspace/ros_workspace/mobile_robots_ws/devel
-
-Name: checkpoint_1
-Description: Description of checkpoint_1
-Version: 0.0.0
-Cflags: 
-Libs: -L${prefix}/lib 
-Requires: 
