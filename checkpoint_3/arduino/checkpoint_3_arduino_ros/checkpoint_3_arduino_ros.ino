@@ -193,7 +193,7 @@ void loop()
       }
     }else if (touch_wall == 1){
       motor_forward();
-      delay(1800);
+      delay(2000);
       motor_stop();
       delay(500);
       touch_wall++;
