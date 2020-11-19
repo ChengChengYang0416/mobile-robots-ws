@@ -126,15 +126,15 @@ void search_LED_target()
       }
       delay(1000);
     }else{
-      motor_turn_left();
+      motor_turn_right();
       delay(5);
       counter++;
     }
   
-    if (counter > 1000){
+    if (counter > 800){
       counter = 0;
       motor_forward();
-      delay(800);
+      delay(500);
     }
 
     if (digitalRead(touch_pin_L) == HIGH){
@@ -166,23 +166,39 @@ void search_LED_target()
 void loop()
 {
   if (touch_wall == 0){
-    motor_forward();
+    motor_forward_PID();
     if (digitalRead(touch_pin_L) == HIGH || digitalRead(touch_pin_R) == HIGH){
       touch_left_sensor();
       motor_turn_left();
-      delay(500);
+      delay(1000);
       motor_stop();
       delay(500);
       touch_wall++;
     }
   }else if (touch_wall == 1){
     motor_forward();
-    delay(1000);
+    delay(1800);
     motor_stop();
     delay(500);
     touch_wall++;
   }else{
     search_LED_target();
+  }
+
+  /* calculate control input by PID */
+  pid_left.abs_duration = abs(encoder_left.duration);
+  pid_left.result = myPID_left.Compute();
+  pid_right.abs_duration = abs(encoder_right.duration);
+  pid_right.result = myPID_right.Compute();
+
+  /* print motor speed */
+  if(pid_left.result)
+  {
+    encoder_left.duration = 0;
+  }
+  if(pid_right.result)
+  {
+    encoder_right.duration = 0;
   }
 }
 
@@ -246,7 +262,7 @@ void motor_forward()  //Motor Forward
 {
   digitalWrite(IN1, LOW);
   digitalWrite(IN2, HIGH);
-  analogWrite(ENA, 200);
+  analogWrite(ENA, 190);
   digitalWrite(IN3, LOW);
   digitalWrite(IN4, HIGH);
   analogWrite(ENB, 200);
@@ -259,7 +275,7 @@ void motor_backward() //Motor reverse
   analogWrite(ENA, 200);
   digitalWrite(IN3, HIGH);
   digitalWrite(IN4, LOW);
-  analogWrite(ENB, 200);
+  analogWrite(ENB, 190);
 }
 
 void motor_turn_left()  // turn left
@@ -269,14 +285,14 @@ void motor_turn_left()  // turn left
   analogWrite(ENA, 0);
   digitalWrite(IN3, LOW);
   digitalWrite(IN4, HIGH);
-  analogWrite(ENB, 150);
+  analogWrite(ENB, 120);
 }
 
 void motor_turn_right()  // turn right
 {
   digitalWrite(IN1, LOW);
   digitalWrite(IN2, HIGH);
-  analogWrite(ENA, 150);
+  analogWrite(ENA, 160);
   digitalWrite(IN3, LOW);
   digitalWrite(IN4, LOW);
   analogWrite(ENB, 0);
@@ -296,7 +312,7 @@ void touch_left_sensor(){
   motor_stop();
   delay(500);
   motor_backward();
-  delay(1000);
+  delay(800);
   motor_stop();
   delay(500);
 }
@@ -305,7 +321,17 @@ void touch_right_sensor(){
   motor_stop();
   delay(500);
   motor_backward();
-  delay(1000);
+  delay(800);
   motor_stop();
   delay(500);
+}
+
+void motor_forward_PID()  //Motor Forward
+{
+  digitalWrite(IN1, LOW);
+  digitalWrite(IN2, HIGH);
+  analogWrite(ENA, pid_left.val_output);
+  digitalWrite(IN3, LOW);
+  digitalWrite(IN4, HIGH);
+  analogWrite(ENB, pid_right.val_output);
 }
