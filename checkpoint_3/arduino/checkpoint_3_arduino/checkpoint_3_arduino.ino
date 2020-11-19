@@ -104,8 +104,9 @@ void setup()
 
 int counter = 0;
 int get_target = 0;
+int touch_wall = 0;
 
-void loop()
+void search_LED_target()
 {
   if (digitalRead(touch_pin_M) == HIGH){
     get_target = 1;
@@ -159,6 +160,29 @@ void loop()
     {
       encoder_right.duration = 0;
     }
+  }
+}
+
+void loop()
+{
+  if (touch_wall == 0){
+    motor_forward();
+    if (digitalRead(touch_pin_L) == HIGH || digitalRead(touch_pin_R) == HIGH){
+      touch_left_sensor();
+      motor_turn_left();
+      delay(500);
+      motor_stop();
+      delay(500);
+      touch_wall++;
+    }
+  }else if (touch_wall == 1){
+    motor_forward();
+    delay(1000);
+    motor_stop();
+    delay(500);
+    touch_wall++;
+  }else{
+    search_LED_target();
   }
 }
 
@@ -245,14 +269,14 @@ void motor_turn_left()  // turn left
   analogWrite(ENA, 0);
   digitalWrite(IN3, LOW);
   digitalWrite(IN4, HIGH);
-  analogWrite(ENB, pid_right.val_output);
+  analogWrite(ENB, 150);
 }
 
 void motor_turn_right()  // turn right
 {
   digitalWrite(IN1, LOW);
   digitalWrite(IN2, HIGH);
-  analogWrite(ENA, pid_left.val_output);
+  analogWrite(ENA, 150);
   digitalWrite(IN3, LOW);
   digitalWrite(IN4, LOW);
   analogWrite(ENB, 0);
@@ -273,8 +297,6 @@ void touch_left_sensor(){
   delay(500);
   motor_backward();
   delay(1000);
-  //motor_turn_right();
-  //delay(1000);
   motor_stop();
   delay(500);
 }
@@ -284,8 +306,6 @@ void touch_right_sensor(){
   delay(500);
   motor_backward();
   delay(1000);
-  //motor_turn_left();
-  //delay(1000);
   motor_stop();
   delay(500);
 }
