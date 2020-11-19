@@ -119,79 +119,103 @@ void setup()
 
 int counter = 0;
 int get_target = 0;
+int touch_wall = 0;
+
+void search_LED_target()
+{
+  if (digitalRead(touch_pin_M) == HIGH){
+    get_target = 1;
+  }
+
+  if (get_target){
+    motor_stop();
+  }else{
+    val = analogRead(photo_sensor_pin);
+    if (val < 100){
+      motor_stop();
+      delay(1000);
+      motor_forward();
+      if (digitalRead(touch_pin_M) == HIGH){
+        get_target = 1;
+        motor_stop();
+      }
+      delay(1000);
+    }else{
+      motor_turn_right();
+      delay(5);
+      counter++;
+    }
+
+    if (counter > 800){
+      counter = 0;
+      motor_forward();
+      delay(500);
+    }
+
+    if (digitalRead(touch_pin_L) == HIGH){
+      touch_left_sensor();
+    }else if(digitalRead(touch_pin_R) == HIGH){
+      touch_right_sensor();
+    }else{
+      motor_forward();
+    }
+
+    /* calculate control input by PID */
+    pid_left.abs_duration = abs(encoder_left.duration);
+    pid_left.result = myPID_left.Compute();
+    pid_right.abs_duration = abs(encoder_right.duration);
+    pid_right.result = myPID_right.Compute();
+
+    /* print motor speed */
+    if(pid_left.result)
+    {
+      encoder_left.duration = 0;
+    }
+    if(pid_right.result)
+    {
+      encoder_right.duration = 0;
+    }
+  }
+}
 
 void loop()
 {
   if (start){
-    /* arduino recieve the starting signal */
-    /* check if the middle touch sensor trigger */
-    if (digitalRead(touch_pin_M) == HIGH){
-      /* middle touch sensor trigger */
-      get_target = 1;
+    if (touch_wall == 0){
+      motor_forward_PID();
+      if (digitalRead(touch_pin_L) == HIGH || digitalRead(touch_pin_R) == HIGH){
+        touch_left_sensor();
+        motor_turn_left();
+        delay(1000);
+        motor_stop();
+        delay(500);
+        touch_wall++;
+      }
+    }else if (touch_wall == 1){
+      motor_forward();
+      delay(1800);
+      motor_stop();
+      delay(500);
+      touch_wall++;
+    }else{
+      search_LED_target();
     }
 
-    /* check if the robot get the LED target */
-    if (get_target){
-      /* middle touch sensor trigger, the robot stop */
-      motor_stop();
-    }else{
-      /* check if the robot detect the LED target */
-      val = analogRead(photo_sensor_pin);
-      if (val < 100){
-        /* detect the LED target */
-        motor_stop();
-        delay(1000);
-        motor_forward();
+    /* calculate control input by PID */
+    pid_left.abs_duration = abs(encoder_left.duration);
+    pid_left.result = myPID_left.Compute();
+    pid_right.abs_duration = abs(encoder_right.duration);
+    pid_right.result = myPID_right.Compute();
 
-        /* check if the middle touch sensor trigger */
-        if (digitalRead(touch_pin_M) == HIGH){
-          /* middle touch sensor trigger */
-          get_target = 1;
-          motor_stop();
-        }
-        delay(1000);
-      }else{
-        /* has not detect any LED target, turn around to detect if there exists LED target */
-        motor_turn_left();
-        delay(5);
-        counter++;
-      }
-
-      if (counter > 1000){
-        /* can not detect LED target, go straight for 0.8 seconds */
-        counter = 0;
-        motor_forward();
-        delay(800);
-      }
-
-      /* check if the robot touch the obstacle */
-      if (digitalRead(touch_pin_L) == HIGH){
-        /* robot touch the obstacle on the left hand side */
-        touch_left_sensor();
-      }else if(digitalRead(touch_pin_R) == HIGH){
-        /* robot touch the obstacle on the right hand side */
-        touch_right_sensor();
-      }else{
-        /* robot touch nothing, keep going */
-        motor_forward();
-      }
-
-      /* calculate control input by PID */
-      pid_left.abs_duration = abs(encoder_left.duration);
-      pid_left.result = myPID_left.Compute();
-      pid_right.abs_duration = abs(encoder_right.duration);
-      pid_right.result = myPID_right.Compute();
-
-      /* reset duration of encoder */
-      if(pid_left.result)
-      {
-        encoder_left.duration = 0;
-      }
-      if(pid_right.result)
-      {
-        encoder_right.duration = 0;
-      }
-    } 
+    /* reset duration of encoder */
+    if(pid_left.result)
+    {
+      encoder_left.duration = 0;
+    }
+    if(pid_right.result)
+    {
+      encoder_right.duration = 0;
+    }
   }else{
     /* default:static. Or arduino recieve the stopping signal */
     motor_stop();
@@ -260,7 +284,7 @@ void motor_forward()  //Motor Forward
 {
   digitalWrite(IN1, LOW);
   digitalWrite(IN2, HIGH);
-  analogWrite(ENA, 200);
+  analogWrite(ENA, 190);
   digitalWrite(IN3, LOW);
   digitalWrite(IN4, HIGH);
   analogWrite(ENB, 200);
@@ -273,7 +297,7 @@ void motor_backward() //Motor reverse
   analogWrite(ENA, 200);
   digitalWrite(IN3, HIGH);
   digitalWrite(IN4, LOW);
-  analogWrite(ENB, 200);
+  analogWrite(ENB, 190);
 }
 
 void motor_turn_left()  // turn left
@@ -283,14 +307,14 @@ void motor_turn_left()  // turn left
   analogWrite(ENA, 0);
   digitalWrite(IN3, LOW);
   digitalWrite(IN4, HIGH);
-  analogWrite(ENB, pid_right.val_output);
+  analogWrite(ENB, 120);
 }
 
 void motor_turn_right()  // turn right
 {
   digitalWrite(IN1, LOW);
   digitalWrite(IN2, HIGH);
-  analogWrite(ENA, pid_left.val_output);
+  analogWrite(ENA, 160);
   digitalWrite(IN3, LOW);
   digitalWrite(IN4, LOW);
   analogWrite(ENB, 0);
@@ -310,9 +334,7 @@ void touch_left_sensor(){
   motor_stop();
   delay(500);
   motor_backward();
-  delay(1000);
-  //motor_turn_right();
-  //delay(1000);
+  delay(800);
   motor_stop();
   delay(500);
 }
@@ -321,9 +343,17 @@ void touch_right_sensor(){
   motor_stop();
   delay(500);
   motor_backward();
-  delay(1000);
-  //motor_turn_left();
-  //delay(1000);
+  delay(800);
   motor_stop();
   delay(500);
+}
+
+void motor_forward_PID()  //Motor Forward
+{
+  digitalWrite(IN1, LOW);
+  digitalWrite(IN2, HIGH);
+  analogWrite(ENA, pid_left.val_output);
+  digitalWrite(IN3, LOW);
+  digitalWrite(IN4, HIGH);
+  analogWrite(ENB, pid_right.val_output);
 }
