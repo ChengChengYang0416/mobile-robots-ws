@@ -26,14 +26,16 @@ void loop()
 
 void time_up()
 {
-  if (zero_counter >= 2500){
-    Serial.println("detect 1500 beacon");
-  }else if (zero_counter < 1800 && zero_counter > 200){
+  Serial.println(zero_counter);
+
+  if (zero_counter > 2700 && zero_counter < 2800){
     Serial.println("detect 600 beacon");
-  }
-  else{
+  }else if (zero_counter  > 1400 && zero_counter < 1700){
+    Serial.println("detect 1500 beacon");
+  }else {
     Serial.println("detect nothing");
   }
+
   zero_counter = 0;
   all_counter = 0;
 }
