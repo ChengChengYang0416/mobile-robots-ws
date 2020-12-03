@@ -42,7 +42,7 @@ int main(int argc, char **argv)
 {
 	ros::init(argc, argv, "cp4_node");
 	ros::NodeHandle node_obj;
-	ros::Publisher start_pub = node_obj.advertise<std_msgs::Int32>("/start_pub", 10);
+	ros::Publisher command_pub = node_obj.advertise<std_msgs::Int32>("/command_pub", 10);
 	ros::Rate loop_rate(100);
 	std_msgs::Int32 start;
 	start.data = 0;
@@ -74,7 +74,7 @@ int main(int argc, char **argv)
 			}
 		}
 
-		start_pub.publish(start);
+		command_pub.publish(start);
 
 		ros::spinOnce();
 		loop_rate.sleep();
