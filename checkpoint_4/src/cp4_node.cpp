@@ -40,8 +40,7 @@ char getch()
 
 int main(int argc, char **argv)
 {
-
-	ros::init(argc, argv, "cp4_start");
+	ros::init(argc, argv, "cp4_node");
 	ros::NodeHandle node_obj;
 	ros::Publisher start_pub = node_obj.advertise<std_msgs::Int32>("/start_pub", 10);
 	ros::Rate loop_rate(100);
