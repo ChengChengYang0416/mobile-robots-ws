@@ -98,7 +98,33 @@ void setup()
 {
   Serial.begin(9600);
   pinMode(RECV_PIN, INPUT);
+  pinMode(IN1, OUTPUT);
+  pinMode(IN2, OUTPUT);
+  pinMode(ENA, OUTPUT);
+  pinMode(IN3, OUTPUT);
+  pinMode(IN4, OUTPUT);
+  pinMode(ENB, OUTPUT);
+  pinMode(touch_pin_L, INPUT);
+  pinMode(touch_pin_R, INPUT);
+  pinMode(touch_pin_M, INPUT);
+  pinMode(photo_sensor_pin, INPUT);
+
   t.every(200, time_up);
+
+  /* initialize PID configuration */
+  pid_left.setpoint = 200;
+  myPID_left.SetMode(AUTOMATIC);
+  myPID_left.SetSampleTime(100);
+  pid_right.setpoint = 200;
+  myPID_right.SetMode(AUTOMATIC);
+  myPID_right.SetSampleTime(100);
+
+  /* initialize encoder module */
+  EncoderInit();
+
+  /* initilaize node */
+  nh.initNode();
+  nh.subscribe(start_cmd);
 }
 
 void loop()
@@ -125,4 +151,138 @@ void time_up()
 
   zero_counter = 0;
   all_counter = 0;
+}
+
+void EncoderInit()
+{
+  /* initialize encoder module */
+  encoder_left.Direction = true;
+  encoder_right.Direction = true;
+  pinMode(encoder0pinB, INPUT);
+  pinMode(encoder1pinB, INPUT);
+  attachInterrupt(0, wheelSpeed0, CHANGE);
+  attachInterrupt(1, wheelSpeed1, CHANGE);
+}
+
+/* interrupt service routine for interrupt 0 */
+void wheelSpeed0()
+{
+  int Lstate = digitalRead(encoder0pinA);
+  if((encoder_left.encoderPinALast == LOW) && Lstate==HIGH)
+  {
+    int val = digitalRead(encoder0pinB);
+    if(val == LOW && encoder_left.Direction)
+    {
+      encoder_left.Direction = false; //Reverse
+    }
+    else if(val == HIGH && !(encoder_left.Direction))
+    {
+      encoder_left.Direction = true;  //Forward
+    }
+  }
+  encoder_left.encoderPinALast = Lstate;
+
+  if(!encoder_left.Direction)  encoder_left.duration--;
+  else  encoder_left.duration++;
+}
+
+/* interrupt service routine for interrupt 1 */
+void wheelSpeed1()
+{
+  int Lstate = digitalRead(encoder1pinA);
+  if((encoder_right.encoderPinALast == LOW) && Lstate==HIGH)
+  {
+    int val = digitalRead(encoder1pinB);
+    if(val == LOW && encoder_right.Direction)
+    {
+      encoder_right.Direction = false; //Reverse
+    }
+    else if(val == HIGH && !(encoder_right.Direction))
+    {
+      encoder_right.Direction = true;  //Forward
+    }
+  }
+  encoder_right.encoderPinALast = Lstate;
+
+  if(!encoder_right.Direction)  encoder_right.duration--;
+  else  encoder_right.duration++;
+}
+
+/* motor driver function for two wheel */
+void motor_forward()  //Motor Forward
+{
+  digitalWrite(IN1, LOW);
+  digitalWrite(IN2, HIGH);
+  analogWrite(ENA, 190);
+  digitalWrite(IN3, LOW);
+  digitalWrite(IN4, HIGH);
+  analogWrite(ENB, 200);
+}
+
+void motor_backward() //Motor reverse
+{
+  digitalWrite(IN1, HIGH);
+  digitalWrite(IN2, LOW);
+  analogWrite(ENA, 200);
+  digitalWrite(IN3, HIGH);
+  digitalWrite(IN4, LOW);
+  analogWrite(ENB, 190);
+}
+
+void motor_turn_left()  // turn left
+{
+  digitalWrite(IN1, LOW);
+  digitalWrite(IN2, LOW);
+  analogWrite(ENA, 0);
+  digitalWrite(IN3, LOW);
+  digitalWrite(IN4, HIGH);
+  analogWrite(ENB, 120);
+}
+
+void motor_turn_right()  // turn right
+{
+  digitalWrite(IN1, LOW);
+  digitalWrite(IN2, HIGH);
+  analogWrite(ENA, 160);
+  digitalWrite(IN3, LOW);
+  digitalWrite(IN4, LOW);
+  analogWrite(ENB, 0);
+}
+
+void motor_stop() //Motor stops
+{
+  digitalWrite(IN1, LOW);
+  digitalWrite(IN2, LOW);
+  analogWrite(ENA, 0);
+  digitalWrite(IN3, LOW);
+  digitalWrite(IN4, LOW);
+  analogWrite(ENB, 0);
+}
+
+void touch_left_sensor(){
+  motor_stop();
+  delay(500);
+  motor_backward();
+  delay(800);
+  motor_stop();
+  delay(500);
+}
+
+void touch_right_sensor(){
+  motor_stop();
+  delay(500);
+  motor_backward();
+  delay(800);
+  motor_stop();
+  delay(500);
+}
+
+void motor_forward_PID()  //Motor Forward
+{
+  digitalWrite(IN1, LOW);
+  digitalWrite(IN2, HIGH);
+  analogWrite(ENA, pid_left.val_output);
+  digitalWrite(IN3, LOW);
+  digitalWrite(IN4, HIGH);
+  analogWrite(ENB, pid_right.val_output);
 }
