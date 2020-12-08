@@ -32,6 +32,7 @@ IRrecv irrecv(RECV_PIN);
 int zero_counter = 0;
 int all_counter = 0;
 int whichbeacon = 0;
+int beacon_counter = 0;
 
 /* structure of encoder */
 typedef struct
@@ -126,6 +127,28 @@ void setup()
   /* initilaize node */
   nh.initNode();
   nh.subscribe(start_cmd);
+}
+
+void search_beacon()
+{
+  if (whichbeacon == 600){
+    /* detect the 600 beacon */
+    motor_stop();
+    delay(1000);
+    motor_forward();
+  }else{
+    /* has not detect any beacon, turn around to detect if there exists beacon */
+    motor_turn_right();
+    delay(5);
+    beacon_counter++;
+  }
+
+  if (beacon_counter > 800){
+    /* can not detect any beacon, go straight for 0.5 seconds */
+    beacon_counter = 0;
+    motor_forward();
+    delay(500);
+  }
 }
 
 void loop()
