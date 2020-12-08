@@ -149,6 +149,34 @@ void search_beacon()
     motor_forward();
     delay(500);
   }
+
+  /* check if the robot touch the obstacle */
+  if (digitalRead(touch_pin_L) == HIGH){
+    /* robot touch the obstacle on the left hand side */
+    touch_left_sensor();
+  }else if(digitalRead(touch_pin_R) == HIGH){
+    /* robot touch the obstacle on the right hand side */
+    touch_right_sensor();
+  }else{
+    /* robot touch nothing, keep going */
+    motor_forward();
+  }
+
+  /* calculate control input by PID */
+  pid_left.abs_duration = abs(encoder_left.duration);
+  pid_left.result = myPID_left.Compute();
+  pid_right.abs_duration = abs(encoder_right.duration);
+  pid_right.result = myPID_right.Compute();
+
+  /* reset duration of encoder */
+  if(pid_left.result)
+  {
+    encoder_left.duration = 0;
+  }
+  if(pid_right.result)
+  {
+    encoder_right.duration = 0;
+  }
 }
 
 void loop()
@@ -157,8 +185,10 @@ void loop()
     zero_counter++;
   }
   all_counter++;
-  
   t.update();
+
+  search_beacon();
+  nh.spinOnce();
 }
 
 void time_up()
