@@ -31,6 +31,7 @@ const int RECV_PIN = A2;
 IRrecv irrecv(RECV_PIN);
 int zero_counter = 0;
 int all_counter = 0;
+int whichbeacon = 0;
 
 /* structure of encoder */
 typedef struct
@@ -142,11 +143,11 @@ void time_up()
   Serial.println(zero_counter);
 
   if (zero_counter > 2700 && zero_counter < 2800){
-    Serial.println("detect 600 beacon");
+    whichbeacon = 600;
   }else if (zero_counter  > 1400 && zero_counter < 1700){
-    Serial.println("detect 1500 beacon");
+    whichbeacon = 1500;
   }else {
-    Serial.println("detect nothing");
+    whichbeacon = 0;
   }
 
   zero_counter = 0;
