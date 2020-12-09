@@ -6,6 +6,7 @@ const int RECV_PIN = A2;
 IRrecv irrecv(RECV_PIN);
 int zero_counter = 0;
 int all_counter = 0;
+int whichbeacon = 0;
 
 void setup()
 {

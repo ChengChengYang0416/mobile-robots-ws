@@ -33,6 +33,8 @@ int zero_counter = 0;
 int all_counter = 0;
 int whichbeacon = 0;
 int beacon_counter = 0;
+int fac = 0;
+float fac_f = 0.0;
 
 /* structure of encoder */
 typedef struct
@@ -125,8 +127,8 @@ void setup()
   EncoderInit();
 
   /* initilaize node */
-  nh.initNode();
-  nh.subscribe(start_cmd);
+  //nh.initNode();
+  //nh.subscribe(start_cmd);
 }
 
 void search_beacon()
@@ -136,6 +138,7 @@ void search_beacon()
     motor_stop();
     delay(1000);
     motor_forward();
+    delay(1000);
   }else{
     /* has not detect any beacon, turn around to detect if there exists beacon */
     motor_turn_right();
@@ -187,21 +190,24 @@ void loop()
   all_counter++;
   t.update();
 
+  if (fac_f >= 0.25 && fac_f <= 0.5){
+    //Serial.println(600);
+    whichbeacon = 600;
+  }else if (fac_f >= 0.1 && fac_f <= 0.25){
+    //Serial.println(1500);
+    whichbeacon = 1500;
+  }else{
+    //Serial.println(0);
+    whichbeacon = 0;
+  }
+
   search_beacon();
-  nh.spinOnce();
+  //nh.spinOnce();
 }
 
 void time_up()
 {
-  Serial.println(zero_counter);
-
-  if (zero_counter > 2700 && zero_counter < 2800){
-    whichbeacon = 600;
-  }else if (zero_counter  > 1400 && zero_counter < 1700){
-    whichbeacon = 1500;
-  }else {
-    whichbeacon = 0;
-  }
+  fac_f = (float)(zero_counter)/(float)(all_counter);
 
   zero_counter = 0;
   all_counter = 0;
@@ -297,7 +303,7 @@ void motor_turn_right()  // turn right
 {
   digitalWrite(IN1, LOW);
   digitalWrite(IN2, HIGH);
-  analogWrite(ENA, 160);
+  analogWrite(ENA, 80);
   digitalWrite(IN3, LOW);
   digitalWrite(IN4, LOW);
   analogWrite(ENB, 0);
