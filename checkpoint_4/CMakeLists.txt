@@ -207,3 +207,6 @@ include_directories(
 
 add_executable(cp4_node src/cp4_node.cpp)
 target_link_libraries(cp4_node ${catkin_LIBRARIES})
+
+add_executable(cp4_start src/cp4_start.cpp)
+target_link_libraries(cp4_start ${catkin_LIBRARIES})
