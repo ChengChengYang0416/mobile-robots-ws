@@ -199,13 +199,10 @@ void loop()
 
   Serial.println(fac_f);
   if (fac_f >= 0.25 && fac_f <= 0.5){
-    //Serial.println(600);
     whichbeacon = 600;
   }else if (fac_f >= 0.1 && fac_f <= 0.25){
-    //Serial.println(1500);
     whichbeacon = 1500;
   }else{
-    //Serial.println(0);
     whichbeacon = 0;
   }
 
