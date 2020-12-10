@@ -216,7 +216,7 @@ void search_LED_target()
       /* check if the middle touch sensor trigger */
       if (digitalRead(touch_pin_M) == HIGH){
         get_target = 1;
-        motor_stop();
+        search_beacon();
       }
       delay(1000);
     }else{
