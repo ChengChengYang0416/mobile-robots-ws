@@ -204,3 +204,6 @@ include_directories(
 
 ## Add folders to be run by python nosetests
 # catkin_add_nosetests(test)
+
+add_executable(robot_contest_start src/robot_contest_start.cpp)
+target_link_libraries(robot_contest_start ${catkin_LIBRARIES})
