@@ -120,10 +120,10 @@ void setup()
   t.every(200, time_up);
 
   /* initialize PID configuration */
-  pid_left.setpoint = 200;
+  pid_left.setpoint = 400;
   myPID_left.SetMode(AUTOMATIC);
   myPID_left.SetSampleTime(100);
-  pid_right.setpoint = 200;
+  pid_right.setpoint = 400;
   myPID_right.SetMode(AUTOMATIC);
   myPID_right.SetSampleTime(100);
 
@@ -203,7 +203,14 @@ void search_LED_target()
   /* check if the robot get the LED target */
   if (get_target){
     /* middle touch sensor trigger, the robot stop */
+    motor_stop();
+#if 0
     search_beacon();
+    val = analogRead(photo_sensor_pin);
+    if (val > 800){
+      get_target = 0;
+    }
+#endif
   }else{
     /* check if the robot detect the LED target */
     val = analogRead(photo_sensor_pin);
