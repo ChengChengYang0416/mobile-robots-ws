@@ -263,13 +263,22 @@ void search_LED_target()
   }
 }
 
+int first_move = 1;
+int pid_counter = 0;
+
 void loop()
 {
-  /* move forward for 1 second */
-  motor_forward_PID();
-  delay(1000);
-
-  search_LED_target();
+  if (first_move == 1){
+    /* move forward for 1 second */
+    motor_forward_PID();
+    pid_counter++;
+    //Serial.println(pid_counter);
+    if(pid_counter >= 1000){
+      first_move = 0;
+    }
+  }else{
+    search_LED_target();
+  }
 
   if (digitalRead(RECV_PIN) == 0){
     zero_counter++;
