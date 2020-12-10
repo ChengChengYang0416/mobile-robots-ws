@@ -36,6 +36,9 @@ int beacon_counter = 0;
 int fac = 0;
 float fac_f = 0.0;
 int change_side = 0;
+int counter = 0;
+int get_target = 0;
+int touch_wall = 0;
 
 /* structure of encoder */
 typedef struct
@@ -189,8 +192,85 @@ void search_beacon()
   }
 }
 
+void search_LED_target()
+{
+  /* check if the middle touch sensor trigger */
+  if (digitalRead(touch_pin_M) == HIGH){
+    /* middle touch sensor trigger */
+    get_target = 1;
+  }
+
+  /* check if the robot get the LED target */
+  if (get_target){
+    /* middle touch sensor trigger, the robot stop */
+    search_beacon();
+  }else{
+    /* check if the robot detect the LED target */
+    val = analogRead(photo_sensor_pin);
+    if (val < 100){
+      /* detect the LED target */
+      motor_stop();
+      delay(1000);
+      motor_forward();
+
+      /* check if the middle touch sensor trigger */
+      if (digitalRead(touch_pin_M) == HIGH){
+        get_target = 1;
+        motor_stop();
+      }
+      delay(1000);
+    }else{
+      /* has not detect any LED target, turn around to detect if there exists LED target */
+      motor_turn_right();
+      delay(5);
+      counter++;
+    }
+
+    if (counter > 800){
+      /* can not detect LED target, go straight for 0.5 seconds */
+      counter = 0;
+      motor_forward();
+      delay(500);
+    }
+
+    /* check if the robot touch the obstacle */
+    if (digitalRead(touch_pin_L) == HIGH){
+      /* robot touch the obstacle on the left hand side */
+      touch_left_sensor();
+    }else if(digitalRead(touch_pin_R) == HIGH){
+      /* robot touch the obstacle on the right hand side */
+      touch_right_sensor();
+    }else{
+      /* robot touch nothing, keep going */
+      motor_forward();
+    }
+
+    /* calculate control input by PID */
+    pid_left.abs_duration = abs(encoder_left.duration);
+    pid_left.result = myPID_left.Compute();
+    pid_right.abs_duration = abs(encoder_right.duration);
+    pid_right.result = myPID_right.Compute();
+
+    /* reset duration of encoder */
+    if(pid_left.result)
+    {
+      encoder_left.duration = 0;
+    }
+    if(pid_right.result)
+    {
+      encoder_right.duration = 0;
+    }
+  }
+}
+
 void loop()
 {
+  /* move forward for 1 second */
+  motor_forward_PID();
+  delay(1000);
+
+  search_LED_target();
+
   if (digitalRead(RECV_PIN) == 0){
     zero_counter++;
   }
@@ -206,7 +286,7 @@ void loop()
     whichbeacon = 0;
   }
 
-  search_beacon();
+  //search_beacon();
   //nh.spinOnce();
 }
 
