@@ -204,13 +204,13 @@ void search_LED_target()
   if (get_target){
     /* middle touch sensor trigger, the robot stop */
     motor_stop();
-#if 0
+
     search_beacon();
     val = analogRead(photo_sensor_pin);
     if (val > 800){
       get_target = 0;
     }
-#endif
+
   }else{
     /* check if the robot detect the LED target */
     val = analogRead(photo_sensor_pin);
@@ -233,7 +233,7 @@ void search_LED_target()
       counter++;
     }
 
-    if (counter > 800){
+    if (counter > 1500){
       /* can not detect LED target, go straight for 0.5 seconds */
       counter = 0;
       motor_forward();
