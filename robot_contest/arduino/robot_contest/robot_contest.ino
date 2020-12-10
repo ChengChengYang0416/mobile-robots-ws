@@ -221,7 +221,7 @@ void search_LED_target()
       delay(1000);
     }else{
       /* has not detect any LED target, turn around to detect if there exists LED target */
-      motor_turn_right();
+      motor_turn_left();
       delay(5);
       counter++;
     }
@@ -273,7 +273,7 @@ void loop()
     motor_forward_PID();
     pid_counter++;
     //Serial.println(pid_counter);
-    if(pid_counter >= 1000){
+    if(pid_counter >= 500){
       first_move = 0;
     }
   }else{
