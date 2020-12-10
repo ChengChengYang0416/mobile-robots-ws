@@ -285,6 +285,22 @@ void loop()
   }else{
     whichbeacon = 0;
   }
+  
+  /* calculate control input by PID */
+  pid_left.abs_duration = abs(encoder_left.duration);
+  pid_left.result = myPID_left.Compute();
+  pid_right.abs_duration = abs(encoder_right.duration);
+  pid_right.result = myPID_right.Compute();
+
+  /* reset duration of encoder */
+  if(pid_left.result)
+  {
+    encoder_left.duration = 0;
+  }
+  if(pid_right.result)
+  {
+    encoder_right.duration = 0;
+  }
 
   //search_beacon();
   //nh.spinOnce();
