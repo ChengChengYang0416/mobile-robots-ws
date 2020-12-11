@@ -280,7 +280,7 @@ void loop()
     motor_forward_PID();
     pid_counter++;
     //Serial.println(pid_counter);
-    if(pid_counter >= 300){  // 300, 200, 800
+    if(pid_counter >= 250){  // 300, 200, 800
       first_move = 0;
     }
   }else{
