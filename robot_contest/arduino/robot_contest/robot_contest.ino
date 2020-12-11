@@ -301,7 +301,7 @@ void loop()
   }else{
     whichbeacon = 0;
   }
-  
+
   /* calculate control input by PID */
   pid_left.abs_duration = abs(encoder_left.duration);
   pid_left.result = myPID_left.Compute();
