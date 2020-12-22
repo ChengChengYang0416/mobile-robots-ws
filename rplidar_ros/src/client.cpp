@@ -45,7 +45,8 @@ void scanCallback(const sensor_msgs::LaserScan::ConstPtr& scan)
     int count = scan->scan_time / scan->time_increment;
     ROS_INFO("I heard a laser scan %s[%d]:", scan->header.frame_id.c_str(), count);
     ROS_INFO("angle_range, %f, %f", RAD2DEG(scan->angle_min), RAD2DEG(scan->angle_max));
-  
+
+    /* print the depth every 30 degrees */
     for(int i = 0; i < count; i++) {
         float degree = RAD2DEG(scan->angle_min + scan->angle_increment * i);
         ROS_INFO(": [%f, %f]", degree, scan->ranges[i]);
