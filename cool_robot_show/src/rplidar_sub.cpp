@@ -37,8 +37,11 @@
 
 #include "ros/ros.h"
 #include "sensor_msgs/LaserScan.h"
+#include "std_msgs/Int32MultiArray.h"
 
 #define RAD2DEG(x) ((x)*180./M_PI)
+
+std_msgs::Int32MultiArray depth_arr;
 
 void scanCallback(const sensor_msgs::LaserScan::ConstPtr& scan)
 {
@@ -48,12 +51,14 @@ void scanCallback(const sensor_msgs::LaserScan::ConstPtr& scan)
 
     for(int i = 0; i < count; i = i + 30) {
         float degree = RAD2DEG(scan->angle_min + scan->angle_increment * i);
+        depth_arr.data.clear();
         if (scan->ranges[i] > 5.0){
-            ROS_INFO(": [%f, %s]", degree, "6");
+            ROS_INFO(": [%f, %s]", degree, "6.0");
+            depth_arr.data.push_back(6.0);
         }else {
             ROS_INFO(": [%f, %f]", degree, scan->ranges[i]);
+            depth_arr.data.push_back(scan->ranges[i]);
         }
-        
     }
 
 }
@@ -64,6 +69,9 @@ int main(int argc, char **argv)
     ros::NodeHandle n;
 
     ros::Subscriber sub = n.subscribe<sensor_msgs::LaserScan>("/scan", 1000, scanCallback);
+    ros::Publisher pub = n.advertise<std_msgs::Int32MultiArray>("/array", 100);
+
+    pub.publish(depth_arr);
 
     ros::spin();
 
