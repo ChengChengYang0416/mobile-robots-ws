@@ -300,21 +300,21 @@ void motor_backward() //Motor reverse
 void motor_turn_left()  // turn left
 {
   digitalWrite(IN1, LOW);
-  digitalWrite(IN2, LOW);
-  analogWrite(ENA, 0);
+  digitalWrite(IN2, HIGH);
+  analogWrite(ENA, 180);
   digitalWrite(IN3, LOW);
   digitalWrite(IN4, HIGH);
-  analogWrite(ENB, 220);
+  analogWrite(ENB, 250);
 }
 
 void motor_turn_right()  // turn right
 {
   digitalWrite(IN1, LOW);
   digitalWrite(IN2, HIGH);
-  analogWrite(ENA, 220);
+  analogWrite(ENA, 250);
   digitalWrite(IN3, LOW);
-  digitalWrite(IN4, LOW);
-  analogWrite(ENB, 0);
+  digitalWrite(IN4, HIGH);
+  analogWrite(ENB, 180);
 }
 
 void motor_stop() //Motor stops
