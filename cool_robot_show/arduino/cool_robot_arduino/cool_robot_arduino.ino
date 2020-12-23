@@ -182,7 +182,7 @@ void loop()
 {
   switch (command){
     case 65:
-      motor_forward_PID();
+      motor_forward();
       break;
       
     case 66:
