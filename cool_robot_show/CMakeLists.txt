@@ -207,3 +207,6 @@ include_directories(
 
 add_executable(rplidar_sub src/rplidar_sub.cpp)
 target_link_libraries(rplidar_sub ${catkin_LIBRARIES})
+
+add_executable(cool_node src/cool_node.cpp)
+target_link_libraries(cool_node ${catkin_LIBRARIES})
