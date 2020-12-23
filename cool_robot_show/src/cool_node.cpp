@@ -3,6 +3,12 @@
 #include <stdio.h>
 #include <termios.h>
 #include <fcntl.h>
+#include "sensor_msgs/LaserScan.h"
+
+#define RAD2DEG(x) ((x)*180./M_PI)
+
+int action = 0;		// 0 -> go straight, 1 -> turn left, 2 -> turn right
+std_msgs::Int32 start;
 
 /*
  * Taken from
@@ -38,16 +44,54 @@ char getch()
 	return (buf);
 }
 
+void scanCallback(const sensor_msgs::LaserScan::ConstPtr& scan)
+{
+    int count = scan->scan_time / scan->time_increment;
+    ROS_INFO("I heard a laser scan %s[%d]:", scan->header.frame_id.c_str(), count);
+    ROS_INFO("angle_range, %f, %f", RAD2DEG(scan->angle_min), RAD2DEG(scan->angle_max));
+
+    for(int i = 0; i < count; i = i + 30) {
+        float degree = RAD2DEG(scan->angle_min + scan->angle_increment * i);
+		if (i == 150){
+			if (scan->ranges[i] > 5.0){
+				ROS_INFO(": [%f, %s]", degree, "6.0");
+			}else {
+				ROS_INFO(": [%f, %f]", degree, scan->ranges[i]);
+			}
+
+			if (scan->ranges[i] < 0.4){
+				start.data = 68;
+			}else{
+				start.data = 65;
+			}
+		}
+		if (i == 210){
+			if (scan->ranges[i] > 5.0){
+				ROS_INFO(": [%f, %s]", degree, "6.0");
+			}else {
+				ROS_INFO(": [%f, %f]", degree, scan->ranges[i]);
+			}
+
+			if (scan->ranges[i] < 0.4){
+				start.data = 67;
+			}else{
+				start.data = 65;
+			}
+		}
+    }
+}
+
 int main(int argc, char **argv)
 {
 	ros::init(argc, argv, "cool_node");
 	ros::NodeHandle node_obj;
 	ros::Publisher command_pub = node_obj.advertise<std_msgs::Int32>("/command_pub", 10);
+	ros::Subscriber sub = node_obj.subscribe<sensor_msgs::LaserScan>("/scan", 1000, scanCallback);
 	ros::Rate loop_rate(100);
-	std_msgs::Int32 start;
-	start.data = 0;
+	start.data = 65;
 
 	while (ros::ok()) {
+#if 0
 		int c = getch();
 		start.data = 0;
 		if (c != EOF) {
@@ -73,6 +117,7 @@ int main(int argc, char **argv)
 				break;
 			}
 		}
+#endif
 
 		command_pub.publish(start);
 
