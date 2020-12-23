@@ -75,7 +75,9 @@ void scanCallback(const sensor_msgs::LaserScan::ConstPtr& scan)
 			if (scan->ranges[i] < 0.4){
 				start.data = 67;
 			}else{
-				start.data = 65;
+				if (start.data != 68){
+					start.data = 65;
+				}
 			}
 		}
     }
