@@ -1,6 +1,6 @@
 <launch>
 
         <node name="serial_node" pkg="rosserial_python" type="serial_node.py" args="/dev/ttyACM0"/>
-        <node name="cp4_node" pkg="checkpoint_4" type="cp4_node" output="screen"/>
+        <node name="cool_node" pkg="cool_robot_show" type="cool_node" output="screen"/>
 
 </launch>
