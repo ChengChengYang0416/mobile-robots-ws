@@ -59,7 +59,7 @@ void scanCallback(const sensor_msgs::LaserScan::ConstPtr& scan)
 				ROS_INFO(": [%f, %f]", degree, scan->ranges[i]);
 			}
 
-			if (scan->ranges[i] < 0.4){
+			if (scan->ranges[i] < 0.5){
 				start.data = 68;
 			}else{
 				start.data = 65;
@@ -72,7 +72,7 @@ void scanCallback(const sensor_msgs::LaserScan::ConstPtr& scan)
 				ROS_INFO(": [%f, %f]", degree, scan->ranges[i]);
 			}
 
-			if (scan->ranges[i] < 0.4){
+			if (scan->ranges[i] < 0.5){
 				start.data = 67;
 			}else{
 				if (start.data != 68){
