@@ -52,7 +52,7 @@ void scanCallback(const sensor_msgs::LaserScan::ConstPtr& scan)
 
     for(int i = 0; i < count; i = i + 30) {
         float degree = RAD2DEG(scan->angle_min + scan->angle_increment * i);
-		if (i == 150){
+		if (i == 150 || i == 120){
 			if (scan->ranges[i] > 5.0){
 				ROS_INFO(": [%f, %s]", degree, "6.0");
 			}else {
@@ -65,7 +65,7 @@ void scanCallback(const sensor_msgs::LaserScan::ConstPtr& scan)
 				start.data = 65;
 			}
 		}
-		if (i == 210){
+		if (i == 210 || i == 240){
 			if (scan->ranges[i] > 5.0){
 				ROS_INFO(": [%f, %s]", degree, "6.0");
 			}else {
