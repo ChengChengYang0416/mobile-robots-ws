@@ -182,7 +182,7 @@ void loop()
 {
   switch (command){
     case 65:
-      motor_forward();
+      motor_forward_PID();
       break;
       
     case 66:
@@ -299,22 +299,26 @@ void motor_backward() //Motor reverse
 
 void motor_turn_left()  // turn left
 {
+  pid_left.setpoint = 30;
+  pid_right.setpoint = 100;
   digitalWrite(IN1, LOW);
   digitalWrite(IN2, HIGH);
-  analogWrite(ENA, 220);
+  analogWrite(ENA, pid_left.val_output);
   digitalWrite(IN3, LOW);
   digitalWrite(IN4, HIGH);
-  analogWrite(ENB, 250);
+  analogWrite(ENB, pid_right.val_output);
 }
 
 void motor_turn_right()  // turn right
 {
+  pid_left.setpoint = 100;
+  pid_right.setpoint = 30;
   digitalWrite(IN1, LOW);
   digitalWrite(IN2, HIGH);
-  analogWrite(ENA, 250);
+  analogWrite(ENA, pid_left.val_output);
   digitalWrite(IN3, LOW);
   digitalWrite(IN4, HIGH);
-  analogWrite(ENB, 220);
+  analogWrite(ENB, pid_right.val_output);
 }
 
 void motor_stop() //Motor stops
@@ -347,6 +351,8 @@ void touch_right_sensor(){
 
 void motor_forward_PID()  //Motor Forward
 {
+  pid_left.setpoint = 200;
+  pid_right.setpoint = 200;
   digitalWrite(IN1, LOW);
   digitalWrite(IN2, HIGH);
   analogWrite(ENA, pid_left.val_output);
@@ -357,6 +363,8 @@ void motor_forward_PID()  //Motor Forward
 
 void motor_backward_PID()  //Motor Forward
 {
+  pid_left.setpoint = 200;
+  pid_right.setpoint = 200;
   digitalWrite(IN1, HIGH);
   digitalWrite(IN2, LOW);
   analogWrite(ENA, pid_left.val_output);
